@@ -14,6 +14,8 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-
+    @IBAction func manualButton(_ sender: UIButton) {
+        sender.setTitle("Tap here when the contraction ends", for: .normal)
+    }
 }
 
