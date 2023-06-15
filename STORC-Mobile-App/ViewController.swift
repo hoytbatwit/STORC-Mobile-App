@@ -7,6 +7,7 @@
 
 import UIKit
 import HealthKit
+import SwiftUI
 
 class ViewController: UIViewController {
 
@@ -33,13 +34,20 @@ class ViewController: UIViewController {
             //throw error?
         }
         
-        //Request write access to Heart Rate Data
-        let dataType = HKQuantityType.quantityType(forIdentifier: .heartRate)
-        healthStore?.requestAuthorization(toShare: [dataType], read: nil) { success, error in
-            if success {
-                //save sample or call method
+        //Request read/write access to Heart Rate Data
+        let heartRateType:HKQuantityType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!
+        let startDate = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: Date())!
+        let endDate = Calendar.current.date(bySettingHour: 24, minute: 0, second: 0, of: Date())!
+        //let hrQuantity = HKQuantity(
+        //let read:Set = Set([heartRateType])
+        let write:Set = Set([heartRateType])
+        
+        healthStore?.requestAuthorization(toShare: write, read: nil) { success, error in
+            if success{
+                //Successful request save sample here
+                //let sample = HKQuantitySample(type: heartRateType, )
             }else{
-                //Failed request not denied authorization can retry
+                //failure can retry
             }
         }
     }
