@@ -52,6 +52,34 @@ class ViewController: UIViewController {
         }
     }
     
+    func endContraction(peak: Int, current: Int) -> Bool {
+        let percent = 100 * (current - peak) / (peak)
+        print(percent)
+        if percent >= 6 {
+            return true
+        }
+        return false
+    }
+    
+    func startContraction(current: Int, resting: Int) -> Bool {
+        let percent = 100 * (current - resting) / resting
+        if percent >= 6 {
+            return true
+        }
+        return false
+    }
+    
+    func findPeak(current: Int, start: Int) -> Bool {
+        let percent = 100 * (start - current) / start
+        if percent >= 9{
+            return true
+        }
+        return false
+    }
+    
+    //not going to write down generation of moving average yet cause need to figure out how HR data is looking
+    //also not going to write down any main stuff yet cause not sure how that whole process is going to look
+    
     
     @IBAction func manualButton(_ sender: UIButton) {
         switch buttonState{
@@ -68,5 +96,11 @@ class ViewController: UIViewController {
             
         }
     }
+    
+    //button just for testing methods I think I can call them from here
+    @IBAction func testingButton(_ sender: UIButton) {
+        
+    }
+    
 }
 
