@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD844A0A2A3A948600CB44F9 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD844A092A3A948600CB44F9 /* HealthKit.framework */; };
 		DD96B9B62A3387A90093BE16 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD96B9B52A3387A90093BE16 /* AppDelegate.swift */; };
 		DD96B9B82A3387A90093BE16 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD96B9B72A3387A90093BE16 /* SceneDelegate.swift */; };
 		DD96B9BA2A3387A90093BE16 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD96B9B92A3387A90093BE16 /* ViewController.swift */; };
@@ -17,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DD844A072A3A948600CB44F9 /* STORC-Mobile-App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "STORC-Mobile-App.entitlements"; sourceTree = "<group>"; };
+		DD844A092A3A948600CB44F9 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		DD96B9B22A3387A90093BE16 /* STORC-Mobile-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "STORC-Mobile-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD96B9B52A3387A90093BE16 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD96B9B72A3387A90093BE16 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -33,17 +36,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD844A0A2A3A948600CB44F9 /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DD844A082A3A948600CB44F9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DD844A092A3A948600CB44F9 /* HealthKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		DD96B9A92A3387A90093BE16 = {
 			isa = PBXGroup;
 			children = (
 				DD96B9B42A3387A90093BE16 /* STORC-Mobile-App */,
 				DD96B9B32A3387A90093BE16 /* Products */,
+				DD844A082A3A948600CB44F9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,6 +71,7 @@
 		DD96B9B42A3387A90093BE16 /* STORC-Mobile-App */ = {
 			isa = PBXGroup;
 			children = (
+				DD844A072A3A948600CB44F9 /* STORC-Mobile-App.entitlements */,
 				DD96B9B52A3387A90093BE16 /* AppDelegate.swift */,
 				DD96B9B72A3387A90093BE16 /* SceneDelegate.swift */,
 				DD96B9B92A3387A90093BE16 /* ViewController.swift */,
@@ -289,6 +303,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "STORC-Mobile-App/STORC-Mobile-App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7WTU38A2P3;
@@ -317,6 +332,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "STORC-Mobile-App/STORC-Mobile-App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7WTU38A2P3;
