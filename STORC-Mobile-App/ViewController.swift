@@ -26,7 +26,8 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    func getHealth(){
+    //first we need to get authorization to use health kit data
+    func getHealthAuth(){
         if HKHealthStore.isHealthDataAvailable() {
             healthStore = HKHealthStore()
         }else{
@@ -35,21 +36,42 @@ class ViewController: UIViewController {
         }
         
         //Request read/write access to Heart Rate Data
-        let heartRateType:HKQuantityType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!
-        let startDate = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: Date())!
-        let endDate = Calendar.current.date(bySettingHour: 24, minute: 0, second: 0, of: Date())!
-        //let hrQuantity = HKQuantity(
-        //let read:Set = Set([heartRateType])
-        let write:Set = Set([heartRateType])
+        let dataTypes = Set([HKObjectType.quantityType(forIdentifier: .heartRate)!, HKObjectType.quantityType(forIdentifier: .restingHeartRate)!])
         
-        healthStore?.requestAuthorization(toShare: write, read: nil) { success, error in
+        healthStore?.requestAuthorization(toShare: dataTypes, read: dataTypes) { success, error in
             if success{
-                //Successful request save sample here
-                //let sample = HKQuantitySample(type: heartRateType, )
+                //We got authorization
+                self.getHeartRateData()
             }else{
-                //failure can retry
+                //there was an error we can retry throw error or ask again?
             }
         }
+    }
+    
+    //next we actually get the health kit data that we need for the app
+    func getHeartRateData(){
+        let restingType = HKObjectType.quantityType(forIdentifier: .restingHeartRate)!
+        //only want todays resting HR
+        let startDate = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: Date())!
+        let endDate = Calendar.current.date(bySettingHour: 24, minute: 0, second: 0, of: Date())!
+        
+        let hrUnit = HKQuantity(unit: HKUnit.count(), doubleValue: 70.0)
+        let sample = HKQuantitySample(type: restingType, quantity: hrUnit, start: startDate, end: endDate)
+        healthStore?.save(sample) {success, error in
+            if success {
+                //we got sample and can pass it to UI updater method
+                //need some kind of data to pass into UI function though gonna have to look into that
+                self.updateUI()
+            }else{
+                //there was an error throw error or interupt program somehow?
+            }
+        }
+        
+    }
+    
+    //update UI with the health data that we got from the query
+    func updateUI(){
+        
     }
     
     func endContraction(peak: Int, current: Int) -> Bool {
@@ -79,8 +101,6 @@ class ViewController: UIViewController {
     
     //not going to write down generation of moving average yet cause need to figure out how HR data is looking
     //also not going to write down any main stuff yet cause not sure how that whole process is going to look
-    
-    
     @IBAction func manualButton(_ sender: UIButton) {
         switch buttonState{
         case 1:
@@ -103,4 +123,3 @@ class ViewController: UIViewController {
     }
     
 }
-
