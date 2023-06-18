@@ -44,29 +44,45 @@ class ViewController: UIViewController {
                 self.getHeartRateData()
             }else{
                 //there was an error we can retry throw error or ask again?
+                self.getHealthAuth()
             }
         }
     }
     
     //next we actually get the health kit data that we need for the app
     func getHeartRateData(){
-        let restingType = HKObjectType.quantityType(forIdentifier: .restingHeartRate)!
-        //only want todays resting HR
-        let startDate = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: Date())!
-        let endDate = Calendar.current.date(bySettingHour: 24, minute: 0, second: 0, of: Date())!
+        //type we are querying
+        let heartRate = HKObjectType.quantityType(forIdentifier: .heartRate)!
+        //setting up calendar for date range
+        let calendar = Calendar(identifier: .gregorian)
+        //March 18th 2017 is when sample data was taken
+        var dateComponents = DateComponents()
+        dateComponents.year = 2017
+        dateComponents.month = 3
+        dateComponents.day = 18
         
-        let hrUnit = HKQuantity(unit: HKUnit.count(), doubleValue: 70.0)
-        let sample = HKQuantitySample(type: restingType, quantity: hrUnit, start: startDate, end: endDate)
-        healthStore?.save(sample) {success, error in
-            if success {
-                //we got sample and can pass it to UI updater method
-                //need some kind of data to pass into UI function though gonna have to look into that
-                self.updateUI()
-            }else{
-                //there was an error throw error or interupt program somehow?
-            }
+        let startDate = calendar.date(from: dateComponents)
+        let endDate = calendar.date(from: dateComponents)
+        let pred = HKQuery.predicateForSamples(withStart: startDate, end: endDate)
+        let sort = [NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)]
+        let query = HKSampleQuery(sampleType: heartRate, predicate: pred, limit: 25, sortDescriptors: sort, resultsHandler: { (query, results,error) in
+            guard error == nil else { print("error"); return }
+        
+            self.printHeartRateInfo(results: results)
+        })
+        
+        healthStore?.execute(query)
+        
+    }
+    
+    func printHeartRateInfo(results:[HKSample]?){
+        let heartRateUnit:HKUnit = HKUnit(from: "count/min")
+        for(_, sample) in results!.enumerated(){
+            guard let currData:HKQuantitySample = sample as? HKQuantitySample else {return}
+            
+            print("\(sample)")
+            print("Heart Rate: \(currData.quantity.doubleValue(for: heartRateUnit))")
         }
-        
     }
     
     //update UI with the health data that we got from the query
@@ -105,6 +121,7 @@ class ViewController: UIViewController {
         switch buttonState{
         case 1:
             sender.setTitle("Tap here when the contraction ends", for: .normal)
+            self.getHealthAuth()
             buttonState = 0
         case 0:
             sender.setTitle("Tap here when a contraction begins", for: .normal)
