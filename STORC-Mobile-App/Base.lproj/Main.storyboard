@@ -65,6 +65,15 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eJQ-ed-3Yn">
+                                <rect key="frame" x="163" y="217.5" width="119" height="84"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="84" id="oGu-GJ-785"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="1" green="0.46698926914095851" blue="0.560143082929347" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -73,6 +82,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="3D4-5O-FQx" secondAttribute="bottom" constant="85" id="Cnp-Nr-9az"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8Yw-9A-CW0" secondAttribute="trailing" constant="100" id="Hc1-8S-juA"/>
                             <constraint firstItem="8Yw-9A-CW0" firstAttribute="leading" secondItem="L8Q-pN-bJ2" secondAttribute="trailing" constant="8" id="ICX-YR-hpv"/>
+                            <constraint firstItem="eJQ-ed-3Yn" firstAttribute="firstBaseline" secondItem="L8Q-pN-bJ2" secondAttribute="baseline" id="RF6-LC-rTD"/>
                             <constraint firstItem="3D4-5O-FQx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="89" id="Rtf-MO-QJC"/>
                             <constraint firstItem="bhQ-bZ-saN" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="XBL-KX-l38"/>
                             <constraint firstItem="L8Q-pN-bJ2" firstAttribute="top" secondItem="8Yw-9A-CW0" secondAttribute="top" id="bJP-ud-QLe"/>
@@ -81,10 +91,15 @@
                             <constraint firstItem="L8Q-pN-bJ2" firstAttribute="top" secondItem="bhQ-bZ-saN" secondAttribute="bottom" constant="34" id="jdA-u3-ue5"/>
                             <constraint firstItem="bhQ-bZ-saN" firstAttribute="centerX" secondItem="WnY-AP-wzM" secondAttribute="centerX" constant="-11" id="k71-H0-fDb"/>
                             <constraint firstItem="WnY-AP-wzM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="51" id="kJ2-QN-oJ8"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="eJQ-ed-3Yn" secondAttribute="trailing" constant="132" id="mZa-eD-DsI"/>
                             <constraint firstItem="3D4-5O-FQx" firstAttribute="top" secondItem="WnY-AP-wzM" secondAttribute="bottom" constant="8" id="mjN-ax-W3T"/>
                             <constraint firstItem="8Yw-9A-CW0" firstAttribute="trailing" secondItem="3D4-5O-FQx" secondAttribute="trailing" id="sW6-sq-EHv"/>
+                            <constraint firstItem="eJQ-ed-3Yn" firstAttribute="leading" secondItem="L8Q-pN-bJ2" secondAttribute="trailing" constant="17" id="uG3-04-Mau"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="displayHR" destination="eJQ-ed-3Yn" id="K2D-lm-6bY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

@@ -20,10 +20,12 @@ class ViewController: UIViewController {
     var healthStore : HKHealthStore?
     var HR = 0.0
 
+    @IBOutlet weak var displayHR: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        self.getHealthAuth()
     }
     
     //first we need to get authorization to use health kit data
@@ -81,8 +83,9 @@ class ViewController: UIViewController {
          */
         //var test = 0.0
         // query that is not filtered returns all results
-        //let heartRateUnit:HKUnit = HKUnit(from: "count/min")
+        let heartRateUnit:HKUnit = HKUnit(from: "count/min")
         //let timeUnit:HKUnit = HKUnit(from: "min")
+        var a:String = ""
         let query = HKSampleQuery(sampleType: heartRateOne, predicate: nil, limit: Int(HKObjectQueryNoLimit), sortDescriptors: nil) {
             query, results, error in
             
@@ -95,6 +98,9 @@ class ViewController: UIViewController {
             for sample in samples {
                 //process sample here
                 print("\(sample)")
+                //let d: Double = sample.quantity.doubleValue(for: heartRateUnit)
+                a = String(format: "%.2f", sample.quantity.doubleValue(for: heartRateUnit))
+                //self.displayHR.text = a
                 //print("\(sample.startDate)")
                 //test = sample.quantity.doubleValue(for: heartRateUnit)
                 //print("Heart Rate: \(sample.quantity.doubleValue(for: heartRateUnit))")
@@ -103,6 +109,9 @@ class ViewController: UIViewController {
             
             //results come back on an anonymous background queue
             //dispatch to the main queue before modifying UI
+            DispatchQueue.main.async {
+                self.displayHR.text = a
+            }
             
         }
         healthStore?.execute(query)
@@ -144,7 +153,6 @@ class ViewController: UIViewController {
         switch buttonState{
         case 1:
             sender.setTitle("Tap here when the contraction ends", for: .normal)
-            self.getHealthAuth()
             print("state is contraction is happening")
             buttonState = 0
         case 0:
