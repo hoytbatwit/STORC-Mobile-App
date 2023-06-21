@@ -7,21 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7718FBE52A40E30100AB5C28 /* HomePage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7718FBE42A40E30100AB5C28 /* HomePage.storyboard */; };
+		7718FBE72A40E4A200AB5C28 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7718FBE62A40E4A200AB5C28 /* HomePageViewController.swift */; };
+		774B309F2A40F8AC00C03BF7 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 774B309E2A40F8AC00C03BF7 /* Charts */; };
+		774B30A12A42712800C03BF7 /* TabBarController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 774B30A02A42712800C03BF7 /* TabBarController.storyboard */; };
+		774B30A32A4271DC00C03BF7 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 774B30A22A4271DC00C03BF7 /* Settings.storyboard */; };
+		774B30A62A42734D00C03BF7 /* RevealingSplashView in Frameworks */ = {isa = PBXBuildFile; productRef = 774B30A52A42734D00C03BF7 /* RevealingSplashView */; };
+		774B30A82A42736300C03BF7 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774B30A72A42736300C03BF7 /* SplashScreenViewController.swift */; };
+		774B30AA2A42737A00C03BF7 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 774B30A92A42737A00C03BF7 /* SplashScreen.storyboard */; };
 		DD96B9B62A3387A90093BE16 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD96B9B52A3387A90093BE16 /* AppDelegate.swift */; };
 		DD96B9B82A3387A90093BE16 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD96B9B72A3387A90093BE16 /* SceneDelegate.swift */; };
-		DD96B9BA2A3387A90093BE16 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD96B9B92A3387A90093BE16 /* ViewController.swift */; };
-		DD96B9BD2A3387A90093BE16 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD96B9BB2A3387A90093BE16 /* Main.storyboard */; };
 		DD96B9C02A3387A90093BE16 /* STORC_Mobile_App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DD96B9BE2A3387A90093BE16 /* STORC_Mobile_App.xcdatamodeld */; };
 		DD96B9C22A3387B10093BE16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD96B9C12A3387B10093BE16 /* Assets.xcassets */; };
 		DD96B9C52A3387B10093BE16 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD96B9C32A3387B10093BE16 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7718FBE42A40E30100AB5C28 /* HomePage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomePage.storyboard; sourceTree = "<group>"; };
+		7718FBE62A40E4A200AB5C28 /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
+		774B30A02A42712800C03BF7 /* TabBarController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TabBarController.storyboard; sourceTree = "<group>"; };
+		774B30A22A4271DC00C03BF7 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		774B30A72A42736300C03BF7 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
+		774B30A92A42737A00C03BF7 /* SplashScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SplashScreen.storyboard; sourceTree = "<group>"; };
 		DD96B9B22A3387A90093BE16 /* STORC-Mobile-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "STORC-Mobile-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD96B9B52A3387A90093BE16 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD96B9B72A3387A90093BE16 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DD96B9B92A3387A90093BE16 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		DD96B9BC2A3387A90093BE16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DD96B9BF2A3387A90093BE16 /* STORC_Mobile_App.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = STORC_Mobile_App.xcdatamodel; sourceTree = "<group>"; };
 		DD96B9C12A3387B10093BE16 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DD96B9C42A3387B10093BE16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -33,12 +43,48 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				774B30A62A42734D00C03BF7 /* RevealingSplashView in Frameworks */,
+				774B309F2A40F8AC00C03BF7 /* Charts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		774B30AB2A4354FA00C03BF7 /* HomePage */ = {
+			isa = PBXGroup;
+			children = (
+				7718FBE42A40E30100AB5C28 /* HomePage.storyboard */,
+				7718FBE62A40E4A200AB5C28 /* HomePageViewController.swift */,
+			);
+			path = HomePage;
+			sourceTree = "<group>";
+		};
+		774B30AC2A43550600C03BF7 /* TabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				774B30A02A42712800C03BF7 /* TabBarController.storyboard */,
+			);
+			path = TabBarController;
+			sourceTree = "<group>";
+		};
+		774B30AD2A43552200C03BF7 /* SettingsPage */ = {
+			isa = PBXGroup;
+			children = (
+				774B30A22A4271DC00C03BF7 /* Settings.storyboard */,
+			);
+			path = SettingsPage;
+			sourceTree = "<group>";
+		};
+		774B30AE2A43553300C03BF7 /* SplashScreen */ = {
+			isa = PBXGroup;
+			children = (
+				774B30A92A42737A00C03BF7 /* SplashScreen.storyboard */,
+				774B30A72A42736300C03BF7 /* SplashScreenViewController.swift */,
+			);
+			path = SplashScreen;
+			sourceTree = "<group>";
+		};
 		DD96B9A92A3387A90093BE16 = {
 			isa = PBXGroup;
 			children = (
@@ -60,10 +106,12 @@
 			children = (
 				DD96B9B52A3387A90093BE16 /* AppDelegate.swift */,
 				DD96B9B72A3387A90093BE16 /* SceneDelegate.swift */,
-				DD96B9B92A3387A90093BE16 /* ViewController.swift */,
-				DD96B9BB2A3387A90093BE16 /* Main.storyboard */,
-				DD96B9C12A3387B10093BE16 /* Assets.xcassets */,
+				774B30AE2A43553300C03BF7 /* SplashScreen */,
+				774B30AC2A43550600C03BF7 /* TabBarController */,
+				774B30AB2A4354FA00C03BF7 /* HomePage */,
+				774B30AD2A43552200C03BF7 /* SettingsPage */,
 				DD96B9C32A3387B10093BE16 /* LaunchScreen.storyboard */,
+				DD96B9C12A3387B10093BE16 /* Assets.xcassets */,
 				DD96B9C62A3387B10093BE16 /* Info.plist */,
 				DD96B9BE2A3387A90093BE16 /* STORC_Mobile_App.xcdatamodeld */,
 			);
@@ -86,6 +134,10 @@
 			dependencies = (
 			);
 			name = "STORC-Mobile-App";
+			packageProductDependencies = (
+				774B309E2A40F8AC00C03BF7 /* Charts */,
+				774B30A52A42734D00C03BF7 /* RevealingSplashView */,
+			);
 			productName = "STORC-Mobile-App";
 			productReference = DD96B9B22A3387A90093BE16 /* STORC-Mobile-App.app */;
 			productType = "com.apple.product-type.application";
@@ -114,6 +166,10 @@
 				Base,
 			);
 			mainGroup = DD96B9A92A3387A90093BE16;
+			packageReferences = (
+				774B309D2A40F8AC00C03BF7 /* XCRemoteSwiftPackageReference "Charts" */,
+				774B30A42A42734D00C03BF7 /* XCRemoteSwiftPackageReference "RevealingSplashView" */,
+			);
 			productRefGroup = DD96B9B32A3387A90093BE16 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -128,9 +184,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7718FBE52A40E30100AB5C28 /* HomePage.storyboard in Resources */,
 				DD96B9C52A3387B10093BE16 /* LaunchScreen.storyboard in Resources */,
+				774B30A12A42712800C03BF7 /* TabBarController.storyboard in Resources */,
+				774B30A32A4271DC00C03BF7 /* Settings.storyboard in Resources */,
 				DD96B9C22A3387B10093BE16 /* Assets.xcassets in Resources */,
-				DD96B9BD2A3387A90093BE16 /* Main.storyboard in Resources */,
+				774B30AA2A42737A00C03BF7 /* SplashScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,9 +200,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD96B9BA2A3387A90093BE16 /* ViewController.swift in Sources */,
 				DD96B9B62A3387A90093BE16 /* AppDelegate.swift in Sources */,
+				774B30A82A42736300C03BF7 /* SplashScreenViewController.swift in Sources */,
 				DD96B9B82A3387A90093BE16 /* SceneDelegate.swift in Sources */,
+				7718FBE72A40E4A200AB5C28 /* HomePageViewController.swift in Sources */,
 				DD96B9C02A3387A90093BE16 /* STORC_Mobile_App.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -151,14 +211,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		DD96B9BB2A3387A90093BE16 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DD96B9BC2A3387A90093BE16 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		DD96B9C32A3387B10093BE16 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -220,7 +272,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -274,7 +326,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -291,7 +343,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7WTU38A2P3;
+				DEVELOPMENT_TEAM = XGR4P4EPTG;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "STORC-Mobile-App/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -319,7 +371,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7WTU38A2P3;
+				DEVELOPMENT_TEAM = XGR4P4EPTG;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "STORC-Mobile-App/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -362,6 +414,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		774B309D2A40F8AC00C03BF7 /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielgindi/Charts.git";
+			requirement = {
+				kind = exactVersion;
+				version = 4.1.0;
+			};
+		};
+		774B30A42A42734D00C03BF7 /* XCRemoteSwiftPackageReference "RevealingSplashView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/PiXeL16/RevealingSplashView.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		774B309E2A40F8AC00C03BF7 /* Charts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 774B309D2A40F8AC00C03BF7 /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = Charts;
+		};
+		774B30A52A42734D00C03BF7 /* RevealingSplashView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 774B30A42A42734D00C03BF7 /* XCRemoteSwiftPackageReference "RevealingSplashView" */;
+			productName = RevealingSplashView;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		DD96B9BE2A3387A90093BE16 /* STORC_Mobile_App.xcdatamodeld */ = {
