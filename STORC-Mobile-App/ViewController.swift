@@ -14,11 +14,11 @@ class ViewController: UIViewController {
     //Working on timer stuff for manual contraction
     //var timerRunning = false
     //var ellapsedTime = 0
-    @IBOutlet weak var heartRate: UILabel!
     // going to be used for contraction timing not implemented yet
     //let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     var buttonState = 0
     var healthStore : HKHealthStore?
+    var HR = 0.0
 
     
     override func viewDidLoad() {
@@ -56,7 +56,7 @@ class ViewController: UIViewController {
     func getHeartRateData(){
         print("trying to set up heart rate data")
         //type we are querying
-        guard let heartRate = HKSampleType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate) else {
+        guard let heartRateOne = HKSampleType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate) else {
             fatalError("This should never fail")
         }
         
@@ -79,11 +79,11 @@ class ViewController: UIViewController {
             query, results, error in
         }
          */
-        
+        //var test = 0.0
         // query that is not filtered returns all results
-        let heartRateUnit:HKUnit = HKUnit(from: "count/min")
+        //let heartRateUnit:HKUnit = HKUnit(from: "count/min")
         //let timeUnit:HKUnit = HKUnit(from: "min")
-        let query = HKSampleQuery(sampleType: heartRate, predicate: nil, limit: Int(HKObjectQueryNoLimit), sortDescriptors: nil) {
+        let query = HKSampleQuery(sampleType: heartRateOne, predicate: nil, limit: Int(HKObjectQueryNoLimit), sortDescriptors: nil) {
             query, results, error in
             
             guard let samples = results as? [HKQuantitySample] else {
@@ -94,17 +94,16 @@ class ViewController: UIViewController {
             
             for sample in samples {
                 //process sample here
-                //print("\(sample)")
-                print("\(sample.startDate)")
+                print("\(sample)")
+                //print("\(sample.startDate)")
+                //test = sample.quantity.doubleValue(for: heartRateUnit)
                 //print("Heart Rate: \(sample.quantity.doubleValue(for: heartRateUnit))")
                 //print("Heart Rate: \(sample.quantity.doubleValue(for: timeUnit))")
             }
             
             //results come back on an anonymous background queue
             //dispatch to the main queue before modifying UI
-            DispatchQueue.main.async {
-                //Update UI here
-            }
+            
         }
         healthStore?.execute(query)
     }
@@ -158,10 +157,4 @@ class ViewController: UIViewController {
             return
         }
     }
-    
-    //button just for testing methods I think I can call them from here
-    @IBAction func testingButton(_ sender: UIButton) {
-        
-    }
-    
 }

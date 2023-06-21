@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CURRENT DATA" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bhQ-bZ-saN">
-                                <rect key="frame" x="135" y="44" width="144.5" height="79"/>
+                                <rect key="frame" x="135" y="44" width="123" height="79"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="79" id="YhF-gX-O9j"/>
                                 </constraints>
@@ -56,7 +56,7 @@
                                     <action selector="manualButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3gU-ZW-0Du"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="MANUAL CONTRACTION REPORTING" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WnY-AP-wzM">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MANUAL CONTRACTION REPORTING" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WnY-AP-wzM">
                                 <rect key="frame" x="51" y="633" width="313" height="63"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="63" id="dFD-qb-03H"/>
@@ -65,22 +65,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g1Y-bo-1D8">
-                                <rect key="frame" x="163" y="218" width="96" height="62"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b0g-rJ-kWW">
-                                <rect key="frame" x="135" y="433" width="105" height="92"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Testing Button"/>
-                                <connections>
-                                    <action selector="testingButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="s38-qq-ecM"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="1" green="0.46698926914095851" blue="0.560143082929347" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -95,15 +79,12 @@
                             <constraint firstItem="bhQ-bZ-saN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="135" id="buv-Ef-FY9"/>
                             <constraint firstItem="L8Q-pN-bJ2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="57" id="cgQ-tw-QUF"/>
                             <constraint firstItem="L8Q-pN-bJ2" firstAttribute="top" secondItem="bhQ-bZ-saN" secondAttribute="bottom" constant="34" id="jdA-u3-ue5"/>
-                            <constraint firstItem="bhQ-bZ-saN" firstAttribute="centerX" secondItem="WnY-AP-wzM" secondAttribute="centerX" id="k71-H0-fDb"/>
-                            <constraint firstItem="WnY-AP-wzM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="62" id="kJ2-QN-oJ8"/>
-                            <constraint firstItem="3D4-5O-FQx" firstAttribute="top" secondItem="WnY-AP-wzM" secondAttribute="bottom" constant="38" id="mjN-ax-W3T"/>
+                            <constraint firstItem="bhQ-bZ-saN" firstAttribute="centerX" secondItem="WnY-AP-wzM" secondAttribute="centerX" constant="-11" id="k71-H0-fDb"/>
+                            <constraint firstItem="WnY-AP-wzM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="51" id="kJ2-QN-oJ8"/>
+                            <constraint firstItem="3D4-5O-FQx" firstAttribute="top" secondItem="WnY-AP-wzM" secondAttribute="bottom" constant="8" id="mjN-ax-W3T"/>
                             <constraint firstItem="8Yw-9A-CW0" firstAttribute="trailing" secondItem="3D4-5O-FQx" secondAttribute="trailing" id="sW6-sq-EHv"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="heartRate" destination="g1Y-bo-1D8" id="nkT-Uf-kwq"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
