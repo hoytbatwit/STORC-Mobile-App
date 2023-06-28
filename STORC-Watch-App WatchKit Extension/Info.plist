@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>We will use the HealthKit to detect contractions.</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Used for contraction detection.</string>
+	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
+	<string>Used for contraction detection.</string>
 	<key>NSExtension</key>
 	<dict>
 		<key>NSExtensionAttributes</key>

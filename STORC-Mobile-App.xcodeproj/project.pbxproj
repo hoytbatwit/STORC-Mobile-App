@@ -17,6 +17,7 @@
 		DD844A252A49E38E00CB44F9 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD844A242A49E38E00CB44F9 /* ComplicationController.swift */; };
 		DD844A272A49E39000CB44F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD844A262A49E39000CB44F9 /* Assets.xcassets */; };
 		DD844A2C2A49E39000CB44F9 /* STORC-Watch-App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = DD844A0E2A49E38500CB44F9 /* STORC-Watch-App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		DD844A372A4CFA6800CB44F9 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD844A362A4CFA6800CB44F9 /* HealthKit.framework */; };
 		DD96B9B62A3387A90093BE16 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD96B9B52A3387A90093BE16 /* AppDelegate.swift */; };
 		DD96B9B82A3387A90093BE16 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD96B9B72A3387A90093BE16 /* SceneDelegate.swift */; };
 		DD96B9BA2A3387A90093BE16 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD96B9B92A3387A90093BE16 /* ViewController.swift */; };
@@ -82,6 +83,8 @@
 		DD844A262A49E39000CB44F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DD844A282A49E39000CB44F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD844A292A49E39000CB44F9 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		DD844A352A4CFA6800CB44F9 /* STORC-Watch-App WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "STORC-Watch-App WatchKit Extension.entitlements"; sourceTree = "<group>"; };
+		DD844A362A4CFA6800CB44F9 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS8.5.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
 		DD96B9B22A3387A90093BE16 /* STORC-Mobile-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "STORC-Mobile-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD96B9B52A3387A90093BE16 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD96B9B72A3387A90093BE16 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -98,6 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD844A372A4CFA6800CB44F9 /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,6 +119,7 @@
 		DD844A082A3A948600CB44F9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DD844A362A4CFA6800CB44F9 /* HealthKit.framework */,
 				DD844A092A3A948600CB44F9 /* HealthKit.framework */,
 			);
 			name = Frameworks;
@@ -132,6 +137,7 @@
 		DD844A1D2A49E38E00CB44F9 /* STORC-Watch-App WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				DD844A352A4CFA6800CB44F9 /* STORC-Watch-App WatchKit Extension.entitlements */,
 				DD844A1E2A49E38E00CB44F9 /* InterfaceController.swift */,
 				DD844A202A49E38E00CB44F9 /* ExtensionDelegate.swift */,
 				DD844A222A49E38E00CB44F9 /* NotificationController.swift */,
@@ -429,6 +435,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "STORC-Watch-App WatchKit Extension/STORC-Watch-App WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7WTU38A2P3;
@@ -459,6 +466,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "STORC-Watch-App WatchKit Extension/STORC-Watch-App WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7WTU38A2P3;
