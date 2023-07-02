@@ -8,9 +8,22 @@
 import WatchKit
 import Foundation
 import HealthKit
+import WatchConnectivity
 
 
-class InterfaceController: WKInterfaceController {
+class InterfaceController: WKInterfaceController, WCSessionDelegate {
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        if error != nil {
+            print("There was an error activating the session")
+        }else{
+            print("The session activated with a state of \(activationState)")
+        }
+    }
+    
+    
+    var session = WCSession.default
+    
+    @IBOutlet weak var testOutput: WKInterfaceLabel!
     
     var healthStore : HKHealthStore?
 
@@ -21,6 +34,11 @@ class InterfaceController: WKInterfaceController {
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         self.getAuth()
+        
+        if WCSession.isSupported() {
+            session.delegate = self
+            session.activate()
+        }
     }
     
     override func didDeactivate() {
@@ -52,7 +70,9 @@ class InterfaceController: WKInterfaceController {
     }
     
     func getHeartRateData(){
-        //let heartRateUnit:HKUnit = HKUnit(from: "count/min")
+        let heartRateUnit:HKUnit = HKUnit(from: "count/min")
+        
+        var a:String = ""
         
         let devicePredicate = HKQuery.predicateForObjects(from: [HKDevice.local()])
         
@@ -63,13 +83,35 @@ class InterfaceController: WKInterfaceController {
                 return
             }
             
-            //This is how they process the sample and make is displayable to the user
-            //self.process(samples, type: HKQuantityTypeIdentifier)
+            for sample in samples {
+                a = String(format: ".2f%", sample.quantity.doubleValue(for: heartRateUnit))
+                print(a)
+            }
+            
+            DispatchQueue.main.async {
+                self.testOutput.setText(a)
+            }
         }
         let query = HKAnchoredObjectQuery(type: HKObjectType.quantityType(forIdentifier: .heartRate)!, predicate: devicePredicate, anchor: nil, limit: HKObjectQueryNoLimit, resultsHandler: updateHandler)
         
         query.updateHandler = updateHandler
         
         healthStore?.execute(query)
+    }
+    
+    func displayData(){
+        
+    }
+    
+    func sendMessage() {
+        if session.isReachable {
+            session.sendMessage(["message" : "Hello do you get this"], replyHandler: { (response) in
+                print("Reply: \(response)")
+            }, errorHandler: {(error) in
+                print("Error sending message \(error)")
+            })
+        }else{
+            print("iPhone is not reachable")
+        }
     }
 }

@@ -12,7 +12,11 @@
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="STORC_Watch_App" customModuleProvider="target">
                     <items>
                         <label alignment="left" text="Heart Rate" id="LPe-qR-Mi1"/>
+                        <label alignment="left" text="Label" id="40K-cf-vgB"/>
                     </items>
+                    <connections>
+                        <outlet property="testOutput" destination="40K-cf-vgB" id="nQe-pd-r7A"/>
+                    </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="220" y="345"/>
