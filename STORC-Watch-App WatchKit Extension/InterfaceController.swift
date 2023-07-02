@@ -70,9 +70,11 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     }
     
     func getHeartRateData(){
+        print("trying to get heart rate from the watch")
         let heartRateUnit:HKUnit = HKUnit(from: "count/min")
         
         var a:String = ""
+        /*
         
         let devicePredicate = HKQuery.predicateForObjects(from: [HKDevice.local()])
         
@@ -92,9 +94,29 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
                 self.testOutput.setText(a)
             }
         }
-        let query = HKAnchoredObjectQuery(type: HKObjectType.quantityType(forIdentifier: .heartRate)!, predicate: devicePredicate, anchor: nil, limit: HKObjectQueryNoLimit, resultsHandler: updateHandler)
+        */
+        //previously used HKAnchoredObjectQuery
+        let query = HKSampleQuery(sampleType: HKSampleType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!, predicate: nil, limit: Int(HKObjectQueryNoLimit), sortDescriptors: nil) { query, results, error in
+            
+            guard let samples = results as?
+                    [HKQuantitySample] else {
+                print("There was an error")
+                return
+            }
+            
+            for sample in samples {
+                print("\(sample)")
+                a = String(format: "%.2f%", sample.quantity.doubleValue(for: heartRateUnit))
+                print(a)
+            }
+            
+            DispatchQueue.main.async {
+                self.testOutput.setText(a)
+                self.testOutput.setTextColor(UIColor.white)
+            }
+        }
         
-        query.updateHandler = updateHandler
+        //query.updateHandler = updateHandler
         
         healthStore?.execute(query)
     }
