@@ -11,17 +11,7 @@ import HealthKit
 import WatchConnectivity
 
 
-class InterfaceController: WKInterfaceController, WCSessionDelegate {
-    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        if error != nil {
-            print("There was an error activating the session")
-        }else{
-            print("The session activated with a state of \(activationState)")
-        }
-    }
-    
-    
-    var session = WCSession.default
+class InterfaceController: WKInterfaceController {
     
     @IBOutlet weak var testOutput: WKInterfaceLabel!
     
@@ -34,11 +24,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         self.getAuth()
-        
-        if WCSession.isSupported() {
-            session.delegate = self
-            session.activate()
-        }
     }
     
     override func didDeactivate() {
@@ -105,35 +90,20 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             }
             
             for sample in samples {
-                print("\(sample)")
+                //print("\(sample)")
                 a = String(format: "%.2f%", sample.quantity.doubleValue(for: heartRateUnit))
-                print(a)
+                //print(a)
             }
             
             DispatchQueue.main.async {
                 self.testOutput.setText(a)
                 self.testOutput.setTextColor(UIColor.white)
+                WatchConnection.shared.check(a)
             }
         }
         
         //query.updateHandler = updateHandler
         
         healthStore?.execute(query)
-    }
-    
-    func displayData(){
-        
-    }
-    
-    func sendMessage() {
-        if session.isReachable {
-            session.sendMessage(["message" : "Hello do you get this"], replyHandler: { (response) in
-                print("Reply: \(response)")
-            }, errorHandler: {(error) in
-                print("Error sending message \(error)")
-            })
-        }else{
-            print("iPhone is not reachable")
-        }
     }
 }

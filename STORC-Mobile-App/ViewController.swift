@@ -20,12 +20,19 @@ class ViewController: UIViewController {
     var healthStore : HKHealthStore?
     var HR = 0.0
 
+    @ObservedObject private var connectionManager = WatchConnection.shared
     @IBOutlet weak var displayHR: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.getHealthAuth()
+        //notifyMess()
+    }
+    
+    func notifyMess() {
+        let temp = connectionManager.tempTemp?.text
+        print("The message is:" + temp!)
     }
     
     //first we need to get authorization to use health kit data
@@ -110,16 +117,16 @@ class ViewController: UIViewController {
             //results come back on an anonymous background queue
             //dispatch to the main queue before modifying UI
             DispatchQueue.main.async {
-                self.displayHR.text = a
+                //self.displayHR.text = a
+                if(self.connectionManager.tempTemp?.text != nil){
+                    self.displayHR.text = self.connectionManager.tempTemp?.text
+                }else{
+                    self.displayHR.text = "no message or something wrong"
+                }
             }
             
         }
         healthStore?.execute(query)
-    }
-    
-    //update UI with the health data that we got from the query
-    func updateUI(){
-        
     }
     
     func endContraction(peak: Int, current: Int) -> Bool {
