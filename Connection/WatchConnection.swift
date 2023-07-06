@@ -38,6 +38,7 @@ class WatchConnection: NSObject, ObservableObject {
             self.send(message)
         }
         #endif
+        self.send(message)
     }
     
     func send(_ message: String){

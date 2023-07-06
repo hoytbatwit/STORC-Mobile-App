@@ -8,8 +8,19 @@
 import UIKit
 import HealthKit
 import SwiftUI
+import WatchConnectivity
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, WCSessionDelegate {
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+    }
+    
+    func sessionDidBecomeInactive(_ session: WCSession) {
+    }
+    
+    func sessionDidDeactivate(_ session: WCSession) {
+        session.activate()
+    }
+    
 
     //Working on timer stuff for manual contraction
     //var timerRunning = false
@@ -26,48 +37,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.getHealthAuth()
-        //notifyMess()
-    }
-    
-    func notifyMess() {
-        let temp = connectionManager.tempTemp?.text
-        print("The message is:" + temp!)
-    }
-    
-    //first we need to get authorization to use health kit data
-    func getHealthAuth(){
-        print("Trying to get health auth")
-        //will ensure that health data is available
-        if HKHealthStore.isHealthDataAvailable() {
-            healthStore = HKHealthStore()
-        }else{
-            //no health data available not sure how to handle this
-            //throw error?
-            print("There was an error need a way to handle it")
+        if(WCSession.isSupported()){
+            let session = WCSession.default
+            session.delegate = self
+            session.activate()
         }
-        
-        //Request read/write access to Heart Rate Data
-        let dataTypes = Set([HKObjectType.quantityType(forIdentifier: .heartRate)!, HKObjectType.quantityType(forIdentifier: .restingHeartRate)!])
-        healthStore?.requestAuthorization(toShare: dataTypes, read: dataTypes) { success, error in
-            //We got authorization
-            if success{
-                print("Health auth successfull")
-                self.getHeartRateData()
-            }else{
-                //there was an error we can retry throw error or ask again?
-                print("Some error hopefully able to see in debug console.")
-            }
-        }
+        //self.receive()
     }
-    
-    //next we actually get the health kit data that we need for the app
-    func getHeartRateData(){
-        print("trying to set up heart rate data")
-        //type we are querying
-        guard let heartRateOne = HKSampleType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate) else {
-            fatalError("This should never fail")
-        }
         
         // setting up calendar for date range
         // I have a feeling this will be needed so going to write down the code for getting the current day
@@ -88,45 +64,38 @@ class ViewController: UIViewController {
             query, results, error in
         }
          */
-        //var test = 0.0
-        // query that is not filtered returns all results
-        let heartRateUnit:HKUnit = HKUnit(from: "count/min")
-        //let timeUnit:HKUnit = HKUnit(from: "min")
-        var a:String = ""
-        let query = HKSampleQuery(sampleType: heartRateOne, predicate: nil, limit: Int(HKObjectQueryNoLimit), sortDescriptors: nil) {
-            query, results, error in
-            
-            guard let samples = results as? [HKQuantitySample] else {
-                //handle errors
-                print("There was an error")
-                return
-            }
-            
-            for sample in samples {
-                //process sample here
-                print("\(sample)")
-                //let d: Double = sample.quantity.doubleValue(for: heartRateUnit)
-                a = String(format: "%.2f", sample.quantity.doubleValue(for: heartRateUnit))
-                //self.displayHR.text = a
-                //print("\(sample.startDate)")
-                //test = sample.quantity.doubleValue(for: heartRateUnit)
-                //print("Heart Rate: \(sample.quantity.doubleValue(for: heartRateUnit))")
-                //print("Heart Rate: \(sample.quantity.doubleValue(for: timeUnit))")
-            }
-            
-            //results come back on an anonymous background queue
-            //dispatch to the main queue before modifying UI
-            DispatchQueue.main.async {
-                //self.displayHR.text = a
-                if(self.connectionManager.tempTemp?.text != nil){
+
+    
+    func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
+        let text = message["message"] as? String
+        tempTem(text!)
+        DispatchQueue.main.async {
+            self.displayHR.text = text
+        }
+    }
+    
+    func tempTem(_ message: String){
+        DispatchQueue.main.async {
+            self.displayHR.text = message
+        }
+    }
+    
+    func receive(){
+        //let state = UIApplication.shared.applicationState
+        //print("testing " + String(state))
+        //print(UIApplication.shared.applicationState)
+        print("Does this print")
+        //while(super.isViewLoaded == true){
+            if(self.connectionManager.tempTemp?.text != nil){
+                DispatchQueue.main.async {
                     self.displayHR.text = self.connectionManager.tempTemp?.text
-                }else{
-                    self.displayHR.text = "no message or something wrong"
+                }
+            }else{
+                DispatchQueue.main.async {
+                    self.displayHR.text = "no message"
                 }
             }
-            
-        }
-        healthStore?.execute(query)
+        //}
     }
     
     func endContraction(peak: Int, current: Int) -> Bool {

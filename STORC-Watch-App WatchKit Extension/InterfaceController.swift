@@ -11,7 +11,10 @@ import HealthKit
 import WatchConnectivity
 
 
-class InterfaceController: WKInterfaceController {
+class InterfaceController: WKInterfaceController, WCSessionDelegate {
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+    }
+    
     
     @IBOutlet weak var testOutput: WKInterfaceLabel!
     
@@ -23,6 +26,11 @@ class InterfaceController: WKInterfaceController {
     
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
+        if(WCSession.isSupported()){
+            let session = WCSession.default
+            session.delegate = self
+            session.activate()
+        }
         self.getAuth()
     }
     
@@ -92,13 +100,17 @@ class InterfaceController: WKInterfaceController {
             for sample in samples {
                 //print("\(sample)")
                 a = String(format: "%.2f%", sample.quantity.doubleValue(for: heartRateUnit))
+                //a = "Hello everyone"
                 //print(a)
             }
             
             DispatchQueue.main.async {
                 self.testOutput.setText(a)
                 self.testOutput.setTextColor(UIColor.white)
-                WatchConnection.shared.check(a)
+                //WatchConnection.shared.check(a)
+                WCSession.default.sendMessage(["message": a], replyHandler: nil) { error in
+                    print("Cannot send message: \(error)")
+                }
             }
         }
         
