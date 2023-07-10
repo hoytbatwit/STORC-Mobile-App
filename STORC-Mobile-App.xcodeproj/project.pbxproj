@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		DD2D3B292A55CBCC00D0C0A4 /* WatchConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2D3B282A55CBCC00D0C0A4 /* WatchConnection.swift */; };
 		DD2D3B2A2A55CBCC00D0C0A4 /* WatchConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2D3B282A55CBCC00D0C0A4 /* WatchConnection.swift */; };
+		DD2D3B2C2A5C4B0600D0C0A4 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2D3B2B2A5C4B0600D0C0A4 /* Node.swift */; };
+		DD2D3B2E2A5C5A6F00D0C0A4 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD2D3B2D2A5C5A6F00D0C0A4 /* Login.storyboard */; };
+		DD2D3B302A5C5A7E00D0C0A4 /* Sign-Up.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD2D3B2F2A5C5A7E00D0C0A4 /* Sign-Up.storyboard */; };
 		DD844A0A2A3A948600CB44F9 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD844A092A3A948600CB44F9 /* HealthKit.framework */; };
 		DD844A122A49E38500CB44F9 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD844A102A49E38500CB44F9 /* Interface.storyboard */; };
 		DD844A142A49E38D00CB44F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD844A132A49E38D00CB44F9 /* Assets.xcassets */; };
@@ -73,6 +76,9 @@
 
 /* Begin PBXFileReference section */
 		DD2D3B282A55CBCC00D0C0A4 /* WatchConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnection.swift; sourceTree = "<group>"; };
+		DD2D3B2B2A5C4B0600D0C0A4 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		DD2D3B2D2A5C5A6F00D0C0A4 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		DD2D3B2F2A5C5A7E00D0C0A4 /* Sign-Up.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Sign-Up.storyboard"; sourceTree = "<group>"; };
 		DD844A072A3A948600CB44F9 /* STORC-Mobile-App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "STORC-Mobile-App.entitlements"; sourceTree = "<group>"; };
 		DD844A092A3A948600CB44F9 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		DD844A0E2A49E38500CB44F9 /* STORC-Watch-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "STORC-Watch-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -194,6 +200,9 @@
 				DD96B9C32A3387B10093BE16 /* LaunchScreen.storyboard */,
 				DD96B9C62A3387B10093BE16 /* Info.plist */,
 				DD96B9BE2A3387A90093BE16 /* STORC_Mobile_App.xcdatamodeld */,
+				DD2D3B2B2A5C4B0600D0C0A4 /* Node.swift */,
+				DD2D3B2D2A5C5A6F00D0C0A4 /* Login.storyboard */,
+				DD2D3B2F2A5C5A7E00D0C0A4 /* Sign-Up.storyboard */,
 			);
 			path = "STORC-Mobile-App";
 			sourceTree = "<group>";
@@ -318,6 +327,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD2D3B2E2A5C5A6F00D0C0A4 /* Login.storyboard in Resources */,
+				DD2D3B302A5C5A7E00D0C0A4 /* Sign-Up.storyboard in Resources */,
 				DD96B9C52A3387B10093BE16 /* LaunchScreen.storyboard in Resources */,
 				DD96B9C22A3387B10093BE16 /* Assets.xcassets in Resources */,
 				DD96B9BD2A3387A90093BE16 /* Main.storyboard in Resources */,
@@ -346,6 +357,7 @@
 				DD96B9BA2A3387A90093BE16 /* ViewController.swift in Sources */,
 				DD2D3B292A55CBCC00D0C0A4 /* WatchConnection.swift in Sources */,
 				DD96B9B62A3387A90093BE16 /* AppDelegate.swift in Sources */,
+				DD2D3B2C2A5C4B0600D0C0A4 /* Node.swift in Sources */,
 				DD96B9B82A3387A90093BE16 /* SceneDelegate.swift in Sources */,
 				DD96B9C02A3387A90093BE16 /* STORC_Mobile_App.xcdatamodeld in Sources */,
 			);

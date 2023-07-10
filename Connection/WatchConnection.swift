@@ -14,7 +14,7 @@ struct notify: Identifiable {
 }
 
 class WatchConnection: NSObject, ObservableObject {
-    
+  /*
     static let shared = WatchConnection()
     @Published var tempTemp: notify? = nil
     
@@ -69,4 +69,5 @@ extension WatchConnection: WCSessionDelegate {
         session.activate()
     }
     #endif
+   */
 }

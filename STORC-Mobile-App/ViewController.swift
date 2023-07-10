@@ -27,11 +27,13 @@ class ViewController: UIViewController, WCSessionDelegate {
     //var ellapsedTime = 0
     // going to be used for contraction timing not implemented yet
     //let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    var list = LinkedList<Double>()
     var buttonState = 0
     var healthStore : HKHealthStore?
     var HR = 0.0
+    //var HRValues: [Double] = []
 
-    @ObservedObject private var connectionManager = WatchConnection.shared
+    //@ObservedObject private var connectionManager = WatchConnection.shared
     @IBOutlet weak var displayHR: UILabel!
     
     override func viewDidLoad() {
@@ -65,15 +67,24 @@ class ViewController: UIViewController, WCSessionDelegate {
         }
          */
 
-    
+    //Where we recieve the message from the watch
     func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
         let text = message["message"] as? String
-        tempTem(text!)
+        //tempTem(text!)
+        //add the value to an array for storage
+        list.append(Double(text!)!)
         DispatchQueue.main.async {
             self.displayHR.text = text
         }
     }
     
+    func processData(_ values: [Double]){
+        let length = values.count
+        DispatchQueue.main.async {
+            self.displayHR.text = String(values[length])
+        }
+    }
+    /*
     func tempTem(_ message: String){
         DispatchQueue.main.async {
             self.displayHR.text = message
@@ -97,7 +108,7 @@ class ViewController: UIViewController, WCSessionDelegate {
             }
         //}
     }
-    
+    */
     func endContraction(peak: Int, current: Int) -> Bool {
         let percent = 100 * (current - peak) / (peak)
         print(percent)
