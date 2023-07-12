@@ -77,13 +77,6 @@ class ViewController: UIViewController, WCSessionDelegate {
             self.displayHR.text = text
         }
     }
-    
-    func processData(_ values: [Double]){
-        let length = values.count
-        DispatchQueue.main.async {
-            self.displayHR.text = String(values[length])
-        }
-    }
     /*
     func tempTem(_ message: String){
         DispatchQueue.main.async {
