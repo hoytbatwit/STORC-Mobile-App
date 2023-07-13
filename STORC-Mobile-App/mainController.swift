@@ -10,7 +10,7 @@ import HealthKit
 import SwiftUI
 import WatchConnectivity
 
-class ViewController: UIViewController, WCSessionDelegate {
+class mainController: UIViewController, WCSessionDelegate {
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
     }
     
@@ -21,7 +21,6 @@ class ViewController: UIViewController, WCSessionDelegate {
         session.activate()
     }
     
-
     //Working on timer stuff for manual contraction
     //var timerRunning = false
     //var ellapsedTime = 0
@@ -31,20 +30,24 @@ class ViewController: UIViewController, WCSessionDelegate {
     var buttonState = 0
     var healthStore : HKHealthStore?
     var HR = 0.0
+    let userInfo = UserDefaults.standard
+    
+    @IBOutlet weak var displayHR: UILabel!
+    @IBOutlet weak var welcomeLabel: UILabel!
     //var HRValues: [Double] = []
 
     //@ObservedObject private var connectionManager = WatchConnection.shared
-    @IBOutlet weak var displayHR: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        let name = userInfo.string(forKey: "Username")
+        self.welcomeLabel.text = "Welcome " + name!
         if(WCSession.isSupported()){
             let session = WCSession.default
             session.delegate = self
             session.activate()
         }
-        //self.receive()
     }
         
         // setting up calendar for date range
@@ -62,46 +65,18 @@ class ViewController: UIViewController, WCSessionDelegate {
         }
         let today = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: [])
         let sortByDate = NSSortDescriptor(key: HKSampleSortIdentifiedStartDate, ascending: true)
-        let filterQuery = HKSampleQuery(sampleType: heartRate, predicate: today, limit: Int(HKObjectQueryNoLimit), sortDescriptors: [sortByDate]) {
-            query, results, error in
-        }
          */
 
     //Where we recieve the message from the watch
     func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
         let text = message["message"] as? String
-        //tempTem(text!)
         //add the value to an array for storage
         list.append(Double(text!)!)
         DispatchQueue.main.async {
             self.displayHR.text = text
         }
     }
-    /*
-    func tempTem(_ message: String){
-        DispatchQueue.main.async {
-            self.displayHR.text = message
-        }
-    }
-    
-    func receive(){
-        //let state = UIApplication.shared.applicationState
-        //print("testing " + String(state))
-        //print(UIApplication.shared.applicationState)
-        print("Does this print")
-        //while(super.isViewLoaded == true){
-            if(self.connectionManager.tempTemp?.text != nil){
-                DispatchQueue.main.async {
-                    self.displayHR.text = self.connectionManager.tempTemp?.text
-                }
-            }else{
-                DispatchQueue.main.async {
-                    self.displayHR.text = "no message"
-                }
-            }
-        //}
-    }
-    */
+
     func endContraction(peak: Int, current: Int) -> Bool {
         let percent = 100 * (current - peak) / (peak)
         print(percent)

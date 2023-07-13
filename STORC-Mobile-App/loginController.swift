@@ -7,8 +7,21 @@
 
 import UIKit
 import SwiftUI
+import WatchConnectivity
 
-class loginController: UIViewController {
+class loginController: UIViewController, WCSessionDelegate{
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        
+    }
+    
+    func sessionDidBecomeInactive(_ session: WCSession) {
+        
+    }
+    
+    func sessionDidDeactivate(_ session: WCSession) {
+        session.activate()
+    }
+    
     
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var passwordField: UITextField!
@@ -18,6 +31,12 @@ class loginController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if(WCSession.isSupported()){
+            let session = WCSession.default
+            session.delegate = self
+            session.activate()
+        }
     }
     
     //When user does not have account send them to sign up page
@@ -31,7 +50,6 @@ class loginController: UIViewController {
         let userPass = userInfo.string(forKey: "Password")
         if(userName == usernameField.text && userPass == passwordField.text){
             self.performSegue(withIdentifier: "sendToMain", sender: self)
-
         }else{
             print("There was an error and either username or password isnt correct learn how to handle errors")
         }

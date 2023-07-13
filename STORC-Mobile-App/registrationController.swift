@@ -29,6 +29,7 @@ class registrationController: UIViewController {
             userInfo.set(user, forKey: "Username")
             self.performSegue(withIdentifier: "sendToLogin", sender: self)
         }else{
+            //UI alert view
             print("The passwords do not mach need to handle this error")
         }
     }
