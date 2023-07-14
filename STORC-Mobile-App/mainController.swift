@@ -73,7 +73,6 @@ class mainController: UIViewController, WCSessionDelegate {
     @IBAction func manualButton(_ sender: UIButton) {
         switch buttonState{
         case 1:
-            //sender.setTitle("Tap here when the contraction ends", for: .normal)
             sender.setTitle("Tap here when a contraction begins", for: .normal)
             timer.invalidate()
             manualContractionLength.text = "No contraction happening right now."
@@ -81,13 +80,11 @@ class mainController: UIViewController, WCSessionDelegate {
             currentLength = 0
             buttonState = 0
         case 0:
-            //sender.setTitle("Tap here when a contraction begins", for: .normal)
             sender.setTitle("Tap here when the contraction ends", for: .normal)
             timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: (#selector(timerAction)), userInfo: nil, repeats: true)
             buttonState = 1
         default:
             sender.setTitle("Tap here when a contractoin begins", for: .normal)
-            //manualContractionLength.text = "No contraction happening right now."
             return
         }
     }

@@ -51,7 +51,9 @@ class loginController: UIViewController, WCSessionDelegate{
         if(userName == usernameField.text && userPass == passwordField.text){
             self.performSegue(withIdentifier: "sendToMain", sender: self)
         }else{
-            print("There was an error and either username or password isnt correct learn how to handle errors")
+            let alert = UIAlertController(title: "Login Failed", message: "Your password or username is not correct please try again.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Default action"), style: .default, handler: {_ in NSLog("The \"OK\" alert occured.")}))
+            self.present(alert, animated: true, completion: nil)
         }
     }
 }

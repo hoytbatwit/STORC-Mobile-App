@@ -39,12 +39,11 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     }
     
     func getAuth(){
-        print("Trying to get health auth")
         //will ensure that health data is available
         if HKHealthStore.isHealthDataAvailable() {
             healthStore = HKHealthStore()
         }else{
-            //no health data available not sure how to handle this
+            //no health data available
             print("Error health store is unavailable")
         }
         
@@ -104,11 +103,9 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             DispatchQueue.main.async {
                 self.testOutput.setText(a)
                 self.testOutput.setTextColor(UIColor.white)
-                //WatchConnection.shared.check(a)
                 WCSession.default.sendMessage(["message": a], replyHandler: nil) { error in
                     print("Cannot send message: \(error)")
                 }
-                //WCSession.default.
             }
         }
         healthStore?.execute(query)

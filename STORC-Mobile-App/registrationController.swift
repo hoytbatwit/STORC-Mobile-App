@@ -29,8 +29,9 @@ class registrationController: UIViewController {
             userInfo.set(user, forKey: "Username")
             self.performSegue(withIdentifier: "sendToLogin", sender: self)
         }else{
-            //UI alert view
-            print("The passwords do not mach need to handle this error")
+            let alert = UIAlertController(title: "Registration Failed", message: "Your password did not match please retry.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Default action"), style: .default, handler: {_ in NSLog("The \"OK\" alert occured.")}))
+            self.present(alert, animated: true, completion: nil)
         }
     }
 }
