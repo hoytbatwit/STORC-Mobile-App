@@ -98,10 +98,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             }
             
             for sample in samples {
-                //print("\(sample)")
                 a = String(format: "%.2f%", sample.quantity.doubleValue(for: heartRateUnit))
-                //a = "Hello everyone"
-                //print(a)
             }
             
             DispatchQueue.main.async {
@@ -111,11 +108,9 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
                 WCSession.default.sendMessage(["message": a], replyHandler: nil) { error in
                     print("Cannot send message: \(error)")
                 }
+                //WCSession.default.
             }
         }
-        
-        //query.updateHandler = updateHandler
-        
         healthStore?.execute(query)
     }
 }

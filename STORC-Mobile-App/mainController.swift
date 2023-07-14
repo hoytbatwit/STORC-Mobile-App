@@ -9,40 +9,26 @@ import UIKit
 import HealthKit
 import SwiftUI
 import WatchConnectivity
+import Foundation
 
 class mainController: UIViewController, WCSessionDelegate {
-    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-    }
-    
-    func sessionDidBecomeInactive(_ session: WCSession) {
-    }
-    
-    func sessionDidDeactivate(_ session: WCSession) {
-        session.activate()
-    }
-    
-    //Working on timer stuff for manual contraction
-    //var timerRunning = false
-    //var ellapsedTime = 0
-    // going to be used for contraction timing not implemented yet
-    //let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    var list = LinkedList<Double>()
+    var watchHR = LinkedList<Double>()
+    var manualContractionTime = LinkedList<Int>()
     var buttonState = 0
-    var healthStore : HKHealthStore?
-    var HR = 0.0
+    var currentLength = 0
+    var timer = Timer()
     let userInfo = UserDefaults.standard
     
     @IBOutlet weak var displayHR: UILabel!
     @IBOutlet weak var welcomeLabel: UILabel!
-    //var HRValues: [Double] = []
-
-    //@ObservedObject private var connectionManager = WatchConnection.shared
+    @IBOutlet weak var manualContractionLength: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         let name = userInfo.string(forKey: "Username")
         self.welcomeLabel.text = "Welcome " + name!
+        self.manualContractionLength.text = "No contraction happening right now"
+        
         if(WCSession.isSupported()){
             let session = WCSession.default
             session.delegate = self
@@ -66,58 +52,48 @@ class mainController: UIViewController, WCSessionDelegate {
         let today = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: [])
         let sortByDate = NSSortDescriptor(key: HKSampleSortIdentifiedStartDate, ascending: true)
          */
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {}
+    
+    func sessionDidBecomeInactive(_ session: WCSession) {}
+    
+    func sessionDidDeactivate(_ session: WCSession) {
+        session.activate()
+    }
 
     //Where we recieve the message from the watch
     func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
         let text = message["message"] as? String
-        //add the value to an array for storage
-        list.append(Double(text!)!)
+        watchHR.append(Double(text!)!)
         DispatchQueue.main.async {
             self.displayHR.text = text
         }
     }
-
-    func endContraction(peak: Int, current: Int) -> Bool {
-        let percent = 100 * (current - peak) / (peak)
-        print(percent)
-        if percent >= 6 {
-            return true
-        }
-        return false
-    }
     
-    func startContraction(current: Int, resting: Int) -> Bool {
-        let percent = 100 * (current - resting) / resting
-        if percent >= 6 {
-            return true
-        }
-        return false
-    }
-    
-    func findPeak(current: Int, start: Int) -> Bool {
-        let percent = 100 * (start - current) / start
-        if percent >= 9{
-            return true
-        }
-        return false
-    }
-    
-    //not going to write down generation of moving average yet cause need to figure out how HR data is looking
-    //also not going to write down any main stuff yet cause not sure how that whole process is going to look
+    //logic for manual contraction detection if the user wants to use this instead
     @IBAction func manualButton(_ sender: UIButton) {
         switch buttonState{
         case 1:
-            sender.setTitle("Tap here when the contraction ends", for: .normal)
-            print("state is contraction is happening")
+            //sender.setTitle("Tap here when the contraction ends", for: .normal)
+            sender.setTitle("Tap here when a contraction begins", for: .normal)
+            timer.invalidate()
+            manualContractionLength.text = "No contraction happening right now."
+            manualContractionTime.append(currentLength)
+            currentLength = 0
             buttonState = 0
         case 0:
-            sender.setTitle("Tap here when a contraction begins", for: .normal)
-            print("state is no contraction")
+            //sender.setTitle("Tap here when a contraction begins", for: .normal)
+            sender.setTitle("Tap here when the contraction ends", for: .normal)
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: (#selector(timerAction)), userInfo: nil, repeats: true)
             buttonState = 1
         default:
-            //sender.setTitle("Tap here when a contraction begins", for: .normal)
-            //buttonState = 1
+            sender.setTitle("Tap here when a contractoin begins", for: .normal)
+            //manualContractionLength.text = "No contraction happening right now."
             return
         }
+    }
+    
+    @objc func timerAction() {
+        currentLength = currentLength + 1
+        manualContractionLength.text = "Current Length of your contraction: \(currentLength) seconds"
     }
 }
