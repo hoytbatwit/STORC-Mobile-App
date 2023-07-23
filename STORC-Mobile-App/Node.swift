@@ -7,9 +7,9 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 class Node<T>{
-    
     var value: T
     var next: Node<T>?
     
@@ -19,12 +19,26 @@ class Node<T>{
     }
 }
 
-struct LinkedList<T>{
+struct LinkedList<T> : Sequence{
     var head: Node<T>?
     var tail: Node<T>?
+    var length: Int = 0
+    
+    //needed to conform list to sequence so we can iterate over it during for loops
+    func makeIterator() -> AnyIterator<Node<T>> {
+        var current : Node<T>? = head
+        return AnyIterator<Node<T>> { () -> Node? in
+            defer {current = current?.next}
+            return current
+        }
+    }
     
     var isEmpty: Bool{
-        head == nil
+        if(head == nil){
+            return true
+        }else{
+            return false
+        }
     }
     
     init(){}
@@ -36,6 +50,7 @@ struct LinkedList<T>{
         if(tail == nil){
             tail = head
         }
+        length = length + 1
     }
     
     //append a value to the end of the list
@@ -44,6 +59,8 @@ struct LinkedList<T>{
         
         tail?.next = node
         tail = node
+        
+        length = length + 1
     }
     
     //get the node at the index
@@ -68,7 +85,7 @@ struct LinkedList<T>{
                 tail = nil
             }
         }
-        
+        length = length - 1
         return head?.value
     }
     
@@ -91,7 +108,12 @@ struct LinkedList<T>{
         
         previousNode.next = nil
         tail = previousNode
-        
+        length = length - 1
         return currentNode.value
+    }
+    
+    //Returns the current length of the linked list
+    func getLength() -> Int{
+        return length
     }
 }

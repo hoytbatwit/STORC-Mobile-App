@@ -4,58 +4,55 @@
 //
 //  Created by Brian H on 7/16/23.
 //
-/*
 import Foundation
 
 class MovingAverageBasedContractionDetection {
-    public func monitor(heartRateValue: LinkedList<Int>, average: Int){
-        var currentContractionValues = LinkedList<Int>()
+    public func monitor(heartRateValue: LinkedList<HeartRateDatapoint>, average: Double){
+        var currentContractionValues = LinkedList<HeartRateDatapoint>()
         
         var isContractionOccuring = false;
         var foundPeak = false;
         
-        //need to figure out how to store these for new format
-        //var contractionStartDataPoint = HeartRateDataPoint(heartRateValue: 0, timeStamp: 0.0)
-        //var contractionPeakHR = HeartRateDataPoint(heartRateValue: Int.max, timeStamp: 0.0)
-        var contractionStartHR = 0.0
+        var contractionStartDataPoint = HeartRateDatapoint(heartRateValue: 0.0, timeStamp: Date.now)
+        //var contractionPeakHR = HeartRateDatapoint(heartRateValue: 0.0, timeStamp: Date.now)
         var contractionPeakHR = 0.0
         
-        while heartRateValue.head?.next != nil {
-            var i : Int = 0
-            var currentHeartRateDataPoint = heartRateValue.getNodeAt(at: i)?.value
-            
+        for currentHeartRateDataPoint in heartRateValue {
             if(isContractionOccuring){
-                if(checkIfEndOfContraction(peak: contractionPeakHR, current: Double(currentHeartRateDataPoint!)) && foundPeak){
+                if(checkIfEndOfContraction(peak: contractionPeakHR, current: currentHeartRateDataPoint.value.getHeartRateValue()) && foundPeak){
                     isContractionOccuring = false
                     foundPeak = false
                     
                     print("")
-                    print("Contraction Start HR: ", contractionStartHR)
-                    //will have to come back to this to figure out timing
-                    //print("Contraction Start Time: ", contractionStartDataPoint.getTimeStampValue())
+                    print("Contraction Start HR: ", contractionStartDataPoint.getHeartRateValue())
+                    print("Contraction Start Time: ", contractionStartDataPoint.getTimeStampValue())
                     print("Peak HR during Contraction: ", determinePeakDuringContraction(heartRateDataPoints: currentContractionValues))
-                    print("HR at End of Contraction: ", currentHeartRateDataPoint)
-                    //again have to come back to this
-                    //print("Time at End of Contraction: ", currentHeartRateDataPoint.getTimeStampValue())
+                    print("HR at End of Contraction: ", currentHeartRateDataPoint.value.getHeartRateValue())
+                    print("Time at End of Contraction: ", currentHeartRateDataPoint.value.getTimeStampValue())
                     print("")
                 
                     let notificationName = Notification.Name("ContractionOccurredNotification")
                     NotificationCenter.default.post(name: notificationName, object: currentContractionValues)
                     
-                    //Im going to add a remove all function to the linked list to make this easier
-                    //currentContractionValues.removeAll()
+                    for _ in currentContractionValues{
+                        currentContractionValues.pop()
+                    }
                     continue
                 }else {
-                    if(checkForPeakValue(current: Double(currentHeartRateDataPoint!), startHR: contractionStartHR)) {
+                    if(checkForPeakValue(current: currentHeartRateDataPoint.value.getHeartRateValue(), startHR: contractionStartDataPoint.getHeartRateValue())) {
                         foundPeak = true;
-                        contractionPeakHR = Double(currentHeartRateDataPoint!)
+                        contractionPeakHR = currentHeartRateDataPoint.value.getHeartRateValue()
                     }
                 }
             }else {
-                if(checkIfStartOfContraction(current: Double(currentHeartRateDataPoint!), resting: Double(average))) {
+                if(checkIfStartOfContraction(current: currentHeartRateDataPoint.value.getHeartRateValue(), resting: average)) {
                     isContractionOccuring = true
-                    contractionStartHR = Double(currentHeartRateDataPoint!)
-                    currentContractionValues.append(currentHeartRateDataPoint!)
+                    contractionStartDataPoint = HeartRateDatapoint(heartRateValue: currentHeartRateDataPoint.value.getHeartRateValue(), timeStamp: currentHeartRateDataPoint.value.getTimeStampValue())
+                    if(currentContractionValues.isEmpty == true){
+                        currentContractionValues.push(HeartRateDatapoint(heartRateValue: currentHeartRateDataPoint.value.getHeartRateValue(), timeStamp: currentHeartRateDataPoint.value.getTimeStampValue()))
+                    }else{
+                        currentContractionValues.append(HeartRateDatapoint(heartRateValue: currentHeartRateDataPoint.value.getHeartRateValue(), timeStamp: currentHeartRateDataPoint.value.getTimeStampValue()))
+                    }
                 }
 
             }
@@ -107,11 +104,11 @@ class MovingAverageBasedContractionDetection {
         return false;
     }
     
-    private func determinePeakDuringContraction(heartRateDataPoints: [HeartRateDataPoint]) -> Int{
-        var peak = 0
+    private func determinePeakDuringContraction(heartRateDataPoints: LinkedList<HeartRateDatapoint>) -> Double{
+        var peak = 0.0
         for heartRateDataPoint in heartRateDataPoints {
-            if(heartRateDataPoint.getHeartRateValue() > peak){
-                peak = heartRateDataPoint.getHeartRateValue()
+            if(heartRateDataPoint.value.getHeartRateValue() > peak){
+                peak = heartRateDataPoint.value.getHeartRateValue()
             }
         }
         return peak
@@ -143,22 +140,26 @@ class MovingAverageBasedContractionDetection {
         return false
     }
     
-    public func generateMovingAverage(input: [HeartRateDataPoint]) -> [HeartRateDataPoint]{
-        var results = [HeartRateDataPoint]()
+    public func generateMovingAverage(input: LinkedList<HeartRateDatapoint>) -> LinkedList<HeartRateDatapoint>{
+        var results = LinkedList<HeartRateDatapoint>()
         // LinkedList Implementation
-        var size = 5
-        var sum = 0
+        var size = 5.0
+        var sum = 0.0
         for currentHeartRateDataPoint in input {
-            sum = sum + currentHeartRateDataPoint.getHeartRateValue()
+            sum = sum + currentHeartRateDataPoint.value.getHeartRateValue()
             // Add to LinkedList
             // Check Size and remove
             
             var newValue = sum / size
-            var newData = HeartRateDataPoint(heartRateValue: newValue, timeStamp: currentHeartRateDataPoint.getTimeStampValue())
+            var newData = HeartRateDatapoint(heartRateValue: newValue, timeStamp: currentHeartRateDataPoint.value.getTimeStampValue())
+            if(results.isEmpty == true){
+                results.push(newData)
+            }else{
+                results.append(newData)
+            }
             results.append(newData)
         }
         
         return results
     }
 }
- */

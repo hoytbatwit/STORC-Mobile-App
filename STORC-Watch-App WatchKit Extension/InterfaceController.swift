@@ -64,8 +64,12 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     func getHeartRateData(){
         print("trying to get heart rate from the watch")
         let heartRateUnit:HKUnit = HKUnit(from: "count/min")
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "hh:mm"
         
         var a:String = ""
+        var b:Date = Date.now
+        var c:String = ""
         /*
         
         let devicePredicate = HKQuery.predicateForObjects(from: [HKDevice.local()])
@@ -97,15 +101,25 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             }
             
             for sample in samples {
+                //print("\(sample.endDate)" + "\(sample.quantity.doubleValue(for: heartRateUnit))")
+                //want to use this because passing in a whole date makes it easier for us to do other steps later
+                b = sample.endDate
+                //print(dateFormatter.string(from: b))
+                c = dateFormatter.string(from: b)
                 a = String(format: "%.2f%", sample.quantity.doubleValue(for: heartRateUnit))
             }
             
             DispatchQueue.main.async {
                 self.testOutput.setText(a)
                 self.testOutput.setTextColor(UIColor.white)
-                WCSession.default.sendMessage(["message": a], replyHandler: nil) { error in
+                WCSession.default.sendMessage(["HR": a], replyHandler: nil) { error in
                     print("Cannot send message: \(error)")
                 }
+                /*
+                WCSession.default.sendMessage(["Date": c], replyHandler: nil) { error in
+                    print("Cannot send message: \(error)")
+                }
+                */
             }
         }
         healthStore?.execute(query)

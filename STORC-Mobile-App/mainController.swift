@@ -12,7 +12,7 @@ import WatchConnectivity
 import Foundation
 
 class mainController: UIViewController, WCSessionDelegate {
-    var watchHR = LinkedList<Double>()
+    var HRData = LinkedList<HeartRateDatapoint>()
     var manualContractionTime = LinkedList<Int>()
     var buttonState = 0
     var currentLength = 0
@@ -22,6 +22,7 @@ class mainController: UIViewController, WCSessionDelegate {
     @IBOutlet weak var displayHR: UILabel!
     @IBOutlet weak var welcomeLabel: UILabel!
     @IBOutlet weak var manualContractionLength: UILabel!
+    @IBOutlet weak var HRTimeLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,12 +63,31 @@ class mainController: UIViewController, WCSessionDelegate {
 
     //Where we recieve the message from the watch
     func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
-        let text = message["message"] as? String
-        watchHR.append(Double(text!)!)
+        let HR = message["HR"] as? String
+        let HRDate = message["Date"] as? Date
+        //let dateFormatter = DateFormatter()
+        //dateFormatter.dateFormat = "hh:mm"
+        //print("\(HRTime!)")
+        
+        //need to differentiate between 1st and not 1st because if not some stuff wont work
+        //also preserves the order that stuff was sent in
+        if(HRData.isEmpty == true){
+            HRData.push(HeartRateDatapoint(heartRateValue: Double(HR!)!, timeStamp: HRDate!))
+        }else{
+            HRData.append(HeartRateDatapoint(heartRateValue: Double(HR!)!, timeStamp: HRDate!))
+        }
         DispatchQueue.main.async {
-            self.displayHR.text = text
+            self.displayHR.text = HR
+            //self.HRTimeLabel.text = HRTime
         }
     }
+    
+    //what Im thinking for workflow of the detection process
+    //all of this will be done in a seperate class but well notify users here by calling the notifyUsers function
+    //1. set up monitor so that each time a new value is sent we check
+    //2. if a contraction happened send back bool and the values we need
+    //3. in main notify user we think contraction happened and save data
+    //4. other stuff
     
     //logic for manual contraction detection if the user wants to use this instead
     @IBAction func manualButton(_ sender: UIButton) {
@@ -92,5 +112,26 @@ class mainController: UIViewController, WCSessionDelegate {
     @objc func timerAction() {
         currentLength = currentLength + 1
         manualContractionLength.text = "Current Length of your contraction: \(currentLength) seconds"
+    }
+    /*
+    func windowedContrctionDetection(input: LinkedList<HeartRateDatapoint>) {
+        MovingAverageBasedContractionDetection().monitor(heartRateValue: input, average: self.generateAverageHR(input: input))
+    }
+     */
+    
+    func notifyUserOfContraction(){
+        let alert = UIAlertController(title: "Contraction Detected", message: "We detected a contraction. Please check the contraction log and let us know if we were correct.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Default action"), style: .default, handler: {_ in NSLog("The \"OK\" alert occured.")}))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    //generates the avereage HR for the HR values currently in the list
+    func generateAverageHR(input: LinkedList<Double>) -> Double{
+        let length = input.getLength()
+        var temp = 0.0
+        for HRValue in input{
+            temp = temp + HRValue.value
+        }
+        return temp / Double(length)
     }
 }
