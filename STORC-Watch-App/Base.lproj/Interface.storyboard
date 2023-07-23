@@ -11,9 +11,15 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="STORC_Watch_App" customModuleProvider="target">
                     <items>
-                        <label alignment="left" text="Heart Rate" id="LPe-qR-Mi1"/>
-                        <label alignment="left" text="Label" id="40K-cf-vgB"/>
+                        <label alignment="center" verticalAlignment="center" text="Heart Rate" id="LPe-qR-Mi1">
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                        </label>
+                        <label alignment="center" verticalAlignment="center" text="Label" id="40K-cf-vgB">
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </label>
                     </items>
+                    <color key="backgroundColor" red="1" green="0.46698926909999999" blue="0.56014308290000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>
                         <outlet property="testOutput" destination="40K-cf-vgB" id="nQe-pd-r7A"/>
                     </connections>

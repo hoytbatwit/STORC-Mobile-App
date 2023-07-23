@@ -63,22 +63,26 @@ class mainController: UIViewController, WCSessionDelegate {
 
     //Where we recieve the message from the watch
     func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
-        let HR = message["HR"] as? String
-        let HRDate = message["Date"] as? Date
-        //let dateFormatter = DateFormatter()
-        //dateFormatter.dateFormat = "hh:mm"
+        let incomingDatapoint = message["message"] as? [Any]
+        //let incomingDatapoint = message["message"] as? HeartRateDatapoint
+        //let HR = incomingDatapoint?.getHeartRateValue()
+        //let HRDate = incomingDatapoint?.getTimeStampValue()
+        let HR = incomingDatapoint?[0]
+        let HRDate = incomingDatapoint?[1]
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "hh:mm"
         //print("\(HRTime!)")
         
         //need to differentiate between 1st and not 1st because if not some stuff wont work
         //also preserves the order that stuff was sent in
         if(HRData.isEmpty == true){
-            HRData.push(HeartRateDatapoint(heartRateValue: Double(HR!)!, timeStamp: HRDate!))
+            HRData.push(HeartRateDatapoint(heartRateValue: HR! as! Double, timeStamp: HRDate! as! Date))
         }else{
-            HRData.append(HeartRateDatapoint(heartRateValue: Double(HR!)!, timeStamp: HRDate!))
+            HRData.append(HeartRateDatapoint(heartRateValue: HR! as! Double, timeStamp: HRDate! as! Date))
         }
         DispatchQueue.main.async {
-            self.displayHR.text = HR
-            //self.HRTimeLabel.text = HRTime
+            self.displayHR.text = String(HR! as! Double)
+            self.HRTimeLabel.text = dateFormatter.string(from: HRDate! as! Date)
         }
     }
     

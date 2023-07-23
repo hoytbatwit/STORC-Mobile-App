@@ -12,6 +12,8 @@ import WatchConnectivity
 
 
 class InterfaceController: WKInterfaceController, WCSessionDelegate {
+    var backgroundHR = [Any]()
+    
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
     }
     
@@ -67,11 +69,13 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "hh:mm"
         
-        var a:String = ""
-        var b:Date = Date.now
-        var c:String = ""
+        var dispayHR:String = ""
+        var HRDate:Date = Date.now
+        var HR:Double = 0.0
+        //var temp:HeartRateDatapoint = HeartRateDatapoint(heartRateValue: HR, timeStamp: HRDate)
+        var temp = [Any]()
         /*
-        
+        //so that sample comes from apple watch rather than from the healthstore
         let devicePredicate = HKQuery.predicateForObjects(from: [HKDevice.local()])
         
         let updateHandler: (HKAnchoredObjectQuery, [HKSample]?, [HKDeletedObject]?, HKQueryAnchor?, Error?) -> Void = {
@@ -101,25 +105,25 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             }
             
             for sample in samples {
-                //print("\(sample.endDate)" + "\(sample.quantity.doubleValue(for: heartRateUnit))")
                 //want to use this because passing in a whole date makes it easier for us to do other steps later
-                b = sample.endDate
-                //print(dateFormatter.string(from: b))
-                c = dateFormatter.string(from: b)
-                a = String(format: "%.2f%", sample.quantity.doubleValue(for: heartRateUnit))
+                HRDate = sample.endDate
+                HR = sample.quantity.doubleValue(for: heartRateUnit)
+                //temp = HeartRateDatapoint(heartRateValue: HR, timeStamp: HRDate)
+                //self.backgroundHR.append(temp)
+                temp.append(HR)
+                temp.append(HRDate)
+                //self.backgroundHR.append(temp)
+                dispayHR = String(format: "%.2f%", HR)
             }
             
             DispatchQueue.main.async {
-                self.testOutput.setText(a)
+                self.testOutput.setText(dispayHR)
                 self.testOutput.setTextColor(UIColor.white)
-                WCSession.default.sendMessage(["HR": a], replyHandler: nil) { error in
+                //I think we will need to use transferUserInfo because that allows for background delivery need to use array to send it because we cant use linked list
+                //WCSession.default.transferUserInfo(["message": self.backgroundHR])
+                WCSession.default.sendMessage(["message": temp], replyHandler: nil) { error in
                     print("Cannot send message: \(error)")
                 }
-                /*
-                WCSession.default.sendMessage(["Date": c], replyHandler: nil) { error in
-                    print("Cannot send message: \(error)")
-                }
-                */
             }
         }
         healthStore?.execute(query)
