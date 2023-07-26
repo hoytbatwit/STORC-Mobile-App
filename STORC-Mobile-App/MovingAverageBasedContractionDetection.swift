@@ -8,20 +8,23 @@
 import Foundation
 
 class MovingAverageBasedContractionDetection {
-    public func monitor(heartRateValue: [HeartRateDataPoint], average: Int){
+    public func monitor(heartRateValues: [HeartRateDataPoint], average: Int){
         var currentContractionValues = [HeartRateDataPoint]()
         
         var isContractionOccuring = false;
-        var foundPeak = false;
         
         var contractionStartDataPoint = HeartRateDataPoint(heartRateValue: 0, timeStamp: 0.0)
-        var contractionPeakHR = HeartRateDataPoint(heartRateValue: Int.max, timeStamp: 0.0)
+        var contractionPeakHR = HeartRateDataPoint(heartRateValue: Int.min, timeStamp: 0.0)
         
-        for currentHeartRateDataPoint in heartRateValue {
+        for currentHeartRateDataPoint in heartRateValues {
+            
+            if(contractionPeakHR.getHeartRateValue() < currentHeartRateDataPoint.getHeartRateValue()){
+                contractionPeakHR = currentHeartRateDataPoint
+            }
+            
             if(isContractionOccuring){
-                if(checkIfEndOfContraction(peak: contractionPeakHR.getHeartRateValue(), current: currentHeartRateDataPoint.getHeartRateValue()) && foundPeak){
+                if(checkIfEndOfContraction(peak: contractionPeakHR.getHeartRateValue(), current: currentHeartRateDataPoint.getHeartRateValue())){
                     isContractionOccuring = false
-                    foundPeak = false
                     
                     print("")
                     print("Contraction Start HR: ", contractionStartDataPoint.getHeartRateValue())
@@ -30,17 +33,13 @@ class MovingAverageBasedContractionDetection {
                     print("HR at End of Contraction: ", currentHeartRateDataPoint.getHeartRateValue())
                     print("Time at End of Contraction: ", currentHeartRateDataPoint.getTimeStampValue())
                     print("")
-                
-                    let notificationName = Notification.Name("ContractionOccurredNotification")
-                    NotificationCenter.default.post(name: notificationName, object: currentContractionValues)
+                    
+                    
+                    let notificationName = Notification.Name(rawValue: "ContractionOccurredNotification")
+                    NotificationCenter.default.post(name: notificationName, object: heartRateValues)
                     
                     currentContractionValues.removeAll()
-                    continue
-                }else {
-                    if(checkForPeakValue(current: currentHeartRateDataPoint.getHeartRateValue(), startHR: contractionStartDataPoint.getHeartRateValue())) {
-                        foundPeak = true;
-                        contractionPeakHR = currentHeartRateDataPoint
-                    }
+                    return
                 }
             }else {
                 if(checkIfStartOfContraction(current: currentHeartRateDataPoint.getHeartRateValue(), resting: average)) {
@@ -51,7 +50,7 @@ class MovingAverageBasedContractionDetection {
 
             }
         }
-        if(foundPeak || isContractionOccuring) {
+        if(isContractionOccuring) {
             print("No end to the contraction was detected therefore this contraction either did not happen or the data set ended.")
         }
         
@@ -120,7 +119,8 @@ class MovingAverageBasedContractionDetection {
     
     private func checkIfEndOfContraction(peak: Int, current: Int) -> Bool{
         let percent = 100 * (Double(current - peak) / Double(abs(peak)))
-        if(percent >= 6){
+        print("Percent ", percent, " ", current, " ", peak)
+        if(percent <= -6){
             return true
         }
         return false

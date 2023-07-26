@@ -10,26 +10,28 @@ import CoreML
 
 class ContractionMonitoringDriver {
     
-    
-    let newHeartRateValueReceivedNotificationName = Notification.Name("NewHeartRateValueReceived")
-    let contractionDetectionNotificationName = Notification.Name("ContractionOccurredNotification")
     let movingAverageDetectionHandler = MovingAverageBasedContractionDetection()
-    let heartRateDataPointList = [HeartRateDataPoint]()
-    let potentialContractionHeartRateDataPointList = [HeartRateDataPoint]()
     
     init() {
+        
+        let newHeartRateValueReceivedNotificationName = NSNotification.Name(rawValue:"NewHeartRateValueReceived")
+        let contractionDetectionNotificationName = NSNotification.Name(rawValue:"ContractionOccurredNotification")
+        
         // Will call monitor contraction each time a new heart rate is received.
-        NotificationCenter.default.addObserver(self, selector: #selector(monitorContraction), name: newHeartRateValueReceivedNotificationName, object: heartRateDataPointList)
+        NotificationCenter.default.addObserver(self, selector: #selector(monitorContraction), name: newHeartRateValueReceivedNotificationName, object: nil)
         
         // Will call check if valid contraction when a contraction suspected notification is sent by the window based monitor.
-        NotificationCenter.default.addObserver(self, selector: #selector(checkIfValidContraction), name: contractionDetectionNotificationName, object: potentialContractionHeartRateDataPointList)        
+        NotificationCenter.default.addObserver(self, selector: #selector(checkIfValidContraction), name: contractionDetectionNotificationName, object: nil)
     }
     
-    @objc private func monitorContraction() {
-        movingAverageDetectionHandler.monitor(heartRateValue: heartRateDataPointList, average: 0)
+    @objc private func monitorContraction(_ notification: NSNotification) {
+        print("Called monitor")
+        let heartRateDataPointList = notification.object as! [HeartRateDataPoint]
+        movingAverageDetectionHandler.monitor(heartRateValues: heartRateDataPointList, average: 0)
     }
     
-    @objc private func checkIfValidContraction() {
+    @objc private func checkIfValidContraction(_ notification: NSNotification) {
+        let potentialContractionHeartRateDataPointList = notification.object as! [HeartRateDataPoint]
         let accuracyThreshold = 0.75
         if(makePredictionBasedOnModel(heartRateDataPoints: potentialContractionHeartRateDataPointList) > accuracyThreshold){
             print("Valid Contraction Occurred.")

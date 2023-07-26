@@ -19,6 +19,11 @@
 		778860672A578FE1008FF5CD /* MovingAverageBasedContractionDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778860662A578FE1008FF5CD /* MovingAverageBasedContractionDetection.swift */; };
 		7788606B2A584A37008FF5CD /* STORCTabularClassifier Boosted Tree.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 7788606A2A584A37008FF5CD /* STORCTabularClassifier Boosted Tree.mlmodel */; };
 		7788606D2A584AA2008FF5CD /* ContractionMonitoringDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7788606C2A584AA2008FF5CD /* ContractionMonitoringDriver.swift */; };
+		77C7A3332A67252D00E10CB4 /* HistoricalRecords.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77C7A3322A67252D00E10CB4 /* HistoricalRecords.storyboard */; };
+		77C7A3352A67277F00E10CB4 /* HistoricalRecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C7A3342A67277F00E10CB4 /* HistoricalRecordsViewController.swift */; };
+		77C7A3372A6727F300E10CB4 /* HistoricalRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C7A3362A6727F300E10CB4 /* HistoricalRecordTableViewCell.swift */; };
+		77C7A33A2A672A5100E10CB4 /* DetailedBreakdown.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77C7A3392A672A5100E10CB4 /* DetailedBreakdown.storyboard */; };
+		77C7A33C2A672A8C00E10CB4 /* DetailedBreakdownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C7A33B2A672A8C00E10CB4 /* DetailedBreakdownViewController.swift */; };
 		77D711BD2A5F1AC500AC2359 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77D711BC2A5F1AC500AC2359 /* Main.storyboard */; };
 		DD96B9B62A3387A90093BE16 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD96B9B52A3387A90093BE16 /* AppDelegate.swift */; };
 		DD96B9B82A3387A90093BE16 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD96B9B72A3387A90093BE16 /* SceneDelegate.swift */; };
@@ -38,6 +43,11 @@
 		778860662A578FE1008FF5CD /* MovingAverageBasedContractionDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovingAverageBasedContractionDetection.swift; sourceTree = "<group>"; };
 		7788606A2A584A37008FF5CD /* STORCTabularClassifier Boosted Tree.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "STORCTabularClassifier Boosted Tree.mlmodel"; sourceTree = "<group>"; };
 		7788606C2A584AA2008FF5CD /* ContractionMonitoringDriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractionMonitoringDriver.swift; sourceTree = "<group>"; };
+		77C7A3322A67252D00E10CB4 /* HistoricalRecords.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HistoricalRecords.storyboard; sourceTree = "<group>"; };
+		77C7A3342A67277F00E10CB4 /* HistoricalRecordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalRecordsViewController.swift; sourceTree = "<group>"; };
+		77C7A3362A6727F300E10CB4 /* HistoricalRecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalRecordTableViewCell.swift; sourceTree = "<group>"; };
+		77C7A3392A672A5100E10CB4 /* DetailedBreakdown.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailedBreakdown.storyboard; sourceTree = "<group>"; };
+		77C7A33B2A672A8C00E10CB4 /* DetailedBreakdownViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedBreakdownViewController.swift; sourceTree = "<group>"; };
 		77D711BC2A5F1AC500AC2359 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		DD96B9B22A3387A90093BE16 /* STORC-Mobile-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "STORC-Mobile-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD96B9B52A3387A90093BE16 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +105,25 @@
 			path = SplashScreen;
 			sourceTree = "<group>";
 		};
+		77C7A3312A6724BC00E10CB4 /* HistoricalRecords */ = {
+			isa = PBXGroup;
+			children = (
+				77C7A3322A67252D00E10CB4 /* HistoricalRecords.storyboard */,
+				77C7A3342A67277F00E10CB4 /* HistoricalRecordsViewController.swift */,
+				77C7A3362A6727F300E10CB4 /* HistoricalRecordTableViewCell.swift */,
+			);
+			path = HistoricalRecords;
+			sourceTree = "<group>";
+		};
+		77C7A3382A672A1600E10CB4 /* DetailedBreakdown */ = {
+			isa = PBXGroup;
+			children = (
+				77C7A3392A672A5100E10CB4 /* DetailedBreakdown.storyboard */,
+				77C7A33B2A672A8C00E10CB4 /* DetailedBreakdownViewController.swift */,
+			);
+			path = DetailedBreakdown;
+			sourceTree = "<group>";
+		};
 		DD96B9A92A3387A90093BE16 = {
 			isa = PBXGroup;
 			children = (
@@ -119,6 +148,8 @@
 				774B30AE2A43553300C03BF7 /* SplashScreen */,
 				774B30AC2A43550600C03BF7 /* TabBarController */,
 				774B30AB2A4354FA00C03BF7 /* HomePage */,
+				77C7A3312A6724BC00E10CB4 /* HistoricalRecords */,
+				77C7A3382A672A1600E10CB4 /* DetailedBreakdown */,
 				774B30AD2A43552200C03BF7 /* SettingsPage */,
 				DD96B9C32A3387B10093BE16 /* LaunchScreen.storyboard */,
 				DD96B9C12A3387B10093BE16 /* Assets.xcassets */,
@@ -200,12 +231,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				77D711BD2A5F1AC500AC2359 /* Main.storyboard in Resources */,
+				77C7A33A2A672A5100E10CB4 /* DetailedBreakdown.storyboard in Resources */,
 				7718FBE52A40E30100AB5C28 /* HomePage.storyboard in Resources */,
 				DD96B9C52A3387B10093BE16 /* LaunchScreen.storyboard in Resources */,
 				774B30A12A42712800C03BF7 /* TabBarController.storyboard in Resources */,
 				774B30A32A4271DC00C03BF7 /* Settings.storyboard in Resources */,
 				DD96B9C22A3387B10093BE16 /* Assets.xcassets in Resources */,
 				774B30AA2A42737A00C03BF7 /* SplashScreen.storyboard in Resources */,
+				77C7A3332A67252D00E10CB4 /* HistoricalRecords.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,9 +253,12 @@
 				778860672A578FE1008FF5CD /* MovingAverageBasedContractionDetection.swift in Sources */,
 				778860652A578EC3008FF5CD /* HeartRateDataPoint.swift in Sources */,
 				774B30A82A42736300C03BF7 /* SplashScreenViewController.swift in Sources */,
+				77C7A33C2A672A8C00E10CB4 /* DetailedBreakdownViewController.swift in Sources */,
 				DD96B9B82A3387A90093BE16 /* SceneDelegate.swift in Sources */,
+				77C7A3372A6727F300E10CB4 /* HistoricalRecordTableViewCell.swift in Sources */,
 				7718FBE72A40E4A200AB5C28 /* HomePageViewController.swift in Sources */,
 				7788606B2A584A37008FF5CD /* STORCTabularClassifier Boosted Tree.mlmodel in Sources */,
+				77C7A3352A67277F00E10CB4 /* HistoricalRecordsViewController.swift in Sources */,
 				7788606D2A584AA2008FF5CD /* ContractionMonitoringDriver.swift in Sources */,
 				DD96B9C02A3387A90093BE16 /* STORC_Mobile_App.xcdatamodeld in Sources */,
 			);

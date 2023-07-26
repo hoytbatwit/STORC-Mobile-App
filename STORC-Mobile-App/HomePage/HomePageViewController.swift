@@ -14,6 +14,8 @@ class HomePageViewController: UIViewController {
     @IBOutlet weak var lastRecordedContractionView: UIView!
     
     @IBOutlet weak var historicalRecordsView: UIView!
+    let contractionMonitoringDriver = ContractionMonitoringDriver()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,8 +25,32 @@ class HomePageViewController: UIViewController {
         setupRecentContractionHRChart()
         
         setupHistoricalRecordsView()
+        
+        let potentialContractionHeartRateDataPointList = [        HeartRateDataPoint(heartRateValue: 78, timeStamp: 0),
+            HeartRateDataPoint(heartRateValue: 78, timeStamp: 0.05),
+            HeartRateDataPoint(heartRateValue: 78, timeStamp: 0.10),
+            HeartRateDataPoint(heartRateValue: 78, timeStamp: 0.15),
+            HeartRateDataPoint(heartRateValue: 85, timeStamp: 0.20),
+            HeartRateDataPoint(heartRateValue: 85, timeStamp: 0.25),
+            HeartRateDataPoint(heartRateValue: 82, timeStamp: 0.30),
+            HeartRateDataPoint(heartRateValue: 82, timeStamp: 0.35),
+            HeartRateDataPoint(heartRateValue: 82, timeStamp: 0.40),
+            HeartRateDataPoint(heartRateValue: 80, timeStamp: 0.45),
+            HeartRateDataPoint(heartRateValue: 84, timeStamp: 0.50),
+            HeartRateDataPoint(heartRateValue: 84, timeStamp: 0.55),
+            HeartRateDataPoint(heartRateValue: 80, timeStamp: 1.0),
+            HeartRateDataPoint(heartRateValue: 76, timeStamp: 1.05),
+            HeartRateDataPoint(heartRateValue: 78, timeStamp: 1.10),
+            HeartRateDataPoint(heartRateValue: 78, timeStamp: 1.15),
+            HeartRateDataPoint(heartRateValue: 78, timeStamp: 1.20),
+            HeartRateDataPoint(heartRateValue: 81, timeStamp: 1.25),
+            HeartRateDataPoint(heartRateValue: 82, timeStamp: 1.30)]
+        
+        let notificationName = Notification.Name(rawValue: "NewHeartRateValueReceived")
+        NotificationCenter.default.post(name: notificationName, object: potentialContractionHeartRateDataPointList)
+        
     }
-    
+
     func setupHistoricalRecordsView(){
         historicalRecordsView.layer.cornerRadius = 10
     }
