@@ -10,6 +10,12 @@ import Charts
 
 class DetailedBreakdownViewController: UIViewController {
     
+    var contractionDate = Date()
+    var contractionHRValues = [Int]()
+    var contractionHRDataPoints = [Double : Int]()
+    
+    @IBOutlet weak var contractionBPMLabel: UILabel!
+    @IBOutlet weak var contractionDateLabel: UILabel!
     @IBOutlet weak var recentContractionHRChart: LineChartView!
     
     @IBAction func doneButtonPressed(_ sender: Any) {
@@ -22,15 +28,16 @@ class DetailedBreakdownViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        setupRecentContractionHRChart()
+        setupRecentContractionHRChart(dataPoints: contractionHRDataPoints)
+        contractionDateLabel.text = "\(contractionDate)"
+        contractionBPMLabel.text = "\(contractionHRValues.max() ?? -1) / \(contractionHRValues.min() ?? -1) BPM"
     }
     
-    func setupRecentContractionHRChart(){
-        var dataPoints:[Double:Double] = [0.00:79, 0.05:85, 0.10:83, 0.15:82, 0.20:82, 0.25:74, 0.30:78, 0.35:80, 0.40:79, 0.45:79, 0.50:78, 0.55:78, 1.00:82, 1.05:82, 1.10:82, 1.15:80, 1.20:78, 1.25:82, 1.30:83]
+    func setupRecentContractionHRChart(dataPoints: [Double: Int]){
         
         let dataSet = LineChartDataSet()
         for dataPoint in dataPoints {
-            dataSet.addEntryOrdered(ChartDataEntry(x: dataPoint.key, y: dataPoint.value))
+            dataSet.addEntryOrdered(ChartDataEntry(x: dataPoint.key, y: Double(dataPoint.value)))
         }
         dataSet.label = "BPM"
         dataSet.valueLabelAngle = 45

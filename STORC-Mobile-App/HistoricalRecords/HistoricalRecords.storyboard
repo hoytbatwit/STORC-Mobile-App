@@ -46,21 +46,21 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9qN-9L-Zc9">
                                                     <rect key="frame" x="20" y="11" width="353" height="100"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="000 / 000 BPM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0nf-IW-vZM">
-                                                            <rect key="frame" x="103.66666666666669" y="24" width="146" height="26"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="000 / 000 BPM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0nf-IW-vZM">
+                                                            <rect key="frame" x="78.666666666666686" y="24" width="196" height="26"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="146" id="9or-pn-5pw"/>
+                                                                <constraint firstAttribute="width" constant="196" id="9or-pn-5pw"/>
                                                                 <constraint firstAttribute="height" constant="26" id="KIg-HJ-DkX"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
                                                             <color key="textColor" red="0.90232217189999997" green="0.61039441039999998" blue="0.61039441039999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="July 13th 6:00pm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wl0-T5-tgh">
-                                                            <rect key="frame" x="113.66666666666666" y="58" width="126" height="18"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="July 13th 6:00pm" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wl0-T5-tgh">
+                                                            <rect key="frame" x="52" y="58" width="249" height="18"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="18" id="Rc0-Nr-rec"/>
-                                                                <constraint firstAttribute="width" constant="126" id="eag-12-aVx"/>
+                                                                <constraint firstAttribute="width" constant="249" id="eag-12-aVx"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

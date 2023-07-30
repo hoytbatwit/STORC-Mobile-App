@@ -28,19 +28,18 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="86 / 72 BPM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OyN-fu-ANR">
-                                <rect key="frame" x="28" y="130" width="146" height="26"/>
+                                <rect key="frame" x="28" y="130" width="188" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="26" id="IqA-Ix-iBy"/>
-                                    <constraint firstAttribute="width" constant="146" id="VYj-x5-izf"/>
+                                    <constraint firstAttribute="width" constant="188" id="VYj-x5-izf"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
                                 <color key="textColor" red="0.90232217189999997" green="0.61039441039999998" blue="0.61039441039999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="July 13th 6:00pm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uFl-Dd-C9x">
-                                <rect key="frame" x="28" y="164" width="126" height="18"/>
+                                <rect key="frame" x="28" y="164" width="337" height="18"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="126" id="OhQ-vO-IwJ"/>
                                     <constraint firstAttribute="height" constant="18" id="Pdt-vA-YnX"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
@@ -79,6 +78,7 @@
                         <constraints>
                             <constraint firstItem="a8X-px-gyi" firstAttribute="bottom" secondItem="WaL-2Z-hnH" secondAttribute="bottom" constant="18" id="1jx-0E-pAY"/>
                             <constraint firstItem="BaG-6l-glx" firstAttribute="top" secondItem="jxE-Ip-Tit" secondAttribute="bottom" constant="50" id="4sf-be-liD"/>
+                            <constraint firstItem="a8X-px-gyi" firstAttribute="trailing" secondItem="uFl-Dd-C9x" secondAttribute="trailing" constant="28" id="5JS-JL-qFG"/>
                             <constraint firstItem="uFl-Dd-C9x" firstAttribute="leading" secondItem="a8X-px-gyi" secondAttribute="leading" constant="28" id="AWD-JF-CRN"/>
                             <constraint firstItem="jxE-Ip-Tit" firstAttribute="top" secondItem="uFl-Dd-C9x" secondAttribute="bottom" constant="34" id="IOe-kj-Yl7"/>
                             <constraint firstItem="a8X-px-gyi" firstAttribute="trailing" secondItem="WaL-2Z-hnH" secondAttribute="trailing" constant="20" id="Kad-Oi-ZXP"/>
@@ -96,12 +96,14 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="contractionBPMLabel" destination="OyN-fu-ANR" id="C8g-cM-CVr"/>
+                        <outlet property="contractionDateLabel" destination="uFl-Dd-C9x" id="iFh-gT-nu2"/>
                         <outlet property="recentContractionHRChart" destination="jxE-Ip-Tit" id="JaP-8a-f77"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4gs-fx-b0e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="895" y="61"/>
+            <point key="canvasLocation" x="893.89312977099235" y="60.563380281690144"/>
         </scene>
     </scenes>
     <resources>
