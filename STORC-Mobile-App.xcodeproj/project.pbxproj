@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		7718FBE52A40E30100AB5C28 /* HomePage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7718FBE42A40E30100AB5C28 /* HomePage.storyboard */; };
 		7718FBE72A40E4A200AB5C28 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7718FBE62A40E4A200AB5C28 /* HomePageViewController.swift */; };
+		772BCB002A7708370009CFF9 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 772BCAFC2A7708370009CFF9 /* Login.storyboard */; };
+		772BCB012A7708370009CFF9 /* registrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772BCAFD2A7708370009CFF9 /* registrationController.swift */; };
+		772BCB022A7708370009CFF9 /* loginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772BCAFE2A7708370009CFF9 /* loginController.swift */; };
+		772BCB032A7708370009CFF9 /* Sign-Up.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 772BCAFF2A7708370009CFF9 /* Sign-Up.storyboard */; };
 		774B309F2A40F8AC00C03BF7 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 774B309E2A40F8AC00C03BF7 /* Charts */; };
 		774B30A12A42712800C03BF7 /* TabBarController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 774B30A02A42712800C03BF7 /* TabBarController.storyboard */; };
 		774B30A32A4271DC00C03BF7 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 774B30A22A4271DC00C03BF7 /* Settings.storyboard */; };
@@ -19,10 +23,6 @@
 		778860672A578FE1008FF5CD /* MovingAverageBasedContractionDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778860662A578FE1008FF5CD /* MovingAverageBasedContractionDetection.swift */; };
 		7788606B2A584A37008FF5CD /* STORCTabularClassifier Boosted Tree.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 7788606A2A584A37008FF5CD /* STORCTabularClassifier Boosted Tree.mlmodel */; };
 		7788606D2A584AA2008FF5CD /* ContractionMonitoringDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7788606C2A584AA2008FF5CD /* ContractionMonitoringDriver.swift */; };
-		778F9D7C2A7560FC0069A0E7 /* registrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778F9D7A2A7560FC0069A0E7 /* registrationController.swift */; };
-		778F9D7D2A7560FC0069A0E7 /* loginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778F9D7B2A7560FC0069A0E7 /* loginController.swift */; };
-		778F9D802A7561090069A0E7 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 778F9D7E2A7561090069A0E7 /* Login.storyboard */; };
-		778F9D812A7561090069A0E7 /* Sign-Up.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 778F9D7F2A7561090069A0E7 /* Sign-Up.storyboard */; };
 		77C7A3332A67252D00E10CB4 /* HistoricalRecords.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77C7A3322A67252D00E10CB4 /* HistoricalRecords.storyboard */; };
 		77C7A3352A67277F00E10CB4 /* HistoricalRecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C7A3342A67277F00E10CB4 /* HistoricalRecordsViewController.swift */; };
 		77C7A3372A6727F300E10CB4 /* HistoricalRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C7A3362A6727F300E10CB4 /* HistoricalRecordTableViewCell.swift */; };
@@ -59,6 +59,10 @@
 /* Begin PBXFileReference section */
 		7718FBE42A40E30100AB5C28 /* HomePage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomePage.storyboard; sourceTree = "<group>"; };
 		7718FBE62A40E4A200AB5C28 /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
+		772BCAFC2A7708370009CFF9 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		772BCAFD2A7708370009CFF9 /* registrationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = registrationController.swift; sourceTree = "<group>"; };
+		772BCAFE2A7708370009CFF9 /* loginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = loginController.swift; sourceTree = "<group>"; };
+		772BCAFF2A7708370009CFF9 /* Sign-Up.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Sign-Up.storyboard"; sourceTree = "<group>"; };
 		774B30A02A42712800C03BF7 /* TabBarController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TabBarController.storyboard; sourceTree = "<group>"; };
 		774B30A22A4271DC00C03BF7 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		774B30A72A42736300C03BF7 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
@@ -67,10 +71,6 @@
 		778860662A578FE1008FF5CD /* MovingAverageBasedContractionDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovingAverageBasedContractionDetection.swift; sourceTree = "<group>"; };
 		7788606A2A584A37008FF5CD /* STORCTabularClassifier Boosted Tree.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "STORCTabularClassifier Boosted Tree.mlmodel"; sourceTree = "<group>"; };
 		7788606C2A584AA2008FF5CD /* ContractionMonitoringDriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractionMonitoringDriver.swift; sourceTree = "<group>"; };
-		778F9D7A2A7560FC0069A0E7 /* registrationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = registrationController.swift; path = "../../../../../Downloads/STORC-Mobile-App-Brian-Test-Branch/STORC-Mobile-App/registrationController.swift"; sourceTree = "<group>"; };
-		778F9D7B2A7560FC0069A0E7 /* loginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = loginController.swift; path = "../../../../../Downloads/STORC-Mobile-App-Brian-Test-Branch/STORC-Mobile-App/loginController.swift"; sourceTree = "<group>"; };
-		778F9D7E2A7561090069A0E7 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Login.storyboard; path = "../../../../../Downloads/STORC-Mobile-App-Brian-Test-Branch/STORC-Mobile-App/Storyboards/Login.storyboard"; sourceTree = "<group>"; };
-		778F9D7F2A7561090069A0E7 /* Sign-Up.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = "Sign-Up.storyboard"; path = "../../../../../Downloads/STORC-Mobile-App-Brian-Test-Branch/STORC-Mobile-App/Storyboards/Sign-Up.storyboard"; sourceTree = "<group>"; };
 		77C7A3322A67252D00E10CB4 /* HistoricalRecords.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HistoricalRecords.storyboard; sourceTree = "<group>"; };
 		77C7A3342A67277F00E10CB4 /* HistoricalRecordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalRecordsViewController.swift; sourceTree = "<group>"; };
 		77C7A3362A6727F300E10CB4 /* HistoricalRecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalRecordTableViewCell.swift; sourceTree = "<group>"; };
@@ -155,10 +155,10 @@
 		77ACC94A2A7560BC00127530 /* UserAuth */ = {
 			isa = PBXGroup;
 			children = (
-				778F9D7E2A7561090069A0E7 /* Login.storyboard */,
-				778F9D7F2A7561090069A0E7 /* Sign-Up.storyboard */,
-				778F9D7B2A7560FC0069A0E7 /* loginController.swift */,
-				778F9D7A2A7560FC0069A0E7 /* registrationController.swift */,
+				772BCAFC2A7708370009CFF9 /* Login.storyboard */,
+				772BCAFF2A7708370009CFF9 /* Sign-Up.storyboard */,
+				772BCAFE2A7708370009CFF9 /* loginController.swift */,
+				772BCAFD2A7708370009CFF9 /* registrationController.swift */,
 			);
 			path = UserAuth;
 			sourceTree = "<group>";
@@ -359,13 +359,13 @@
 				77D711BD2A5F1AC500AC2359 /* Main.storyboard in Resources */,
 				77C7A33A2A672A5100E10CB4 /* DetailedBreakdown.storyboard in Resources */,
 				7718FBE52A40E30100AB5C28 /* HomePage.storyboard in Resources */,
+				772BCB032A7708370009CFF9 /* Sign-Up.storyboard in Resources */,
 				DD96B9C52A3387B10093BE16 /* LaunchScreen.storyboard in Resources */,
-				778F9D812A7561090069A0E7 /* Sign-Up.storyboard in Resources */,
 				774B30A12A42712800C03BF7 /* TabBarController.storyboard in Resources */,
 				774B30A32A4271DC00C03BF7 /* Settings.storyboard in Resources */,
 				DD96B9C22A3387B10093BE16 /* Assets.xcassets in Resources */,
+				772BCB002A7708370009CFF9 /* Login.storyboard in Resources */,
 				774B30AA2A42737A00C03BF7 /* SplashScreen.storyboard in Resources */,
-				778F9D802A7561090069A0E7 /* Login.storyboard in Resources */,
 				77C7A3332A67252D00E10CB4 /* HistoricalRecords.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -394,13 +394,13 @@
 				778860652A578EC3008FF5CD /* HeartRateDataPoint.swift in Sources */,
 				774B30A82A42736300C03BF7 /* SplashScreenViewController.swift in Sources */,
 				77C7A33C2A672A8C00E10CB4 /* DetailedBreakdownViewController.swift in Sources */,
+				772BCB012A7708370009CFF9 /* registrationController.swift in Sources */,
 				DD96B9B82A3387A90093BE16 /* SceneDelegate.swift in Sources */,
 				77C7A3372A6727F300E10CB4 /* HistoricalRecordTableViewCell.swift in Sources */,
 				7718FBE72A40E4A200AB5C28 /* HomePageViewController.swift in Sources */,
 				7788606B2A584A37008FF5CD /* STORCTabularClassifier Boosted Tree.mlmodel in Sources */,
-				778F9D7C2A7560FC0069A0E7 /* registrationController.swift in Sources */,
 				77C7A3352A67277F00E10CB4 /* HistoricalRecordsViewController.swift in Sources */,
-				778F9D7D2A7560FC0069A0E7 /* loginController.swift in Sources */,
+				772BCB022A7708370009CFF9 /* loginController.swift in Sources */,
 				7788606D2A584AA2008FF5CD /* ContractionMonitoringDriver.swift in Sources */,
 				77F9868E2A71780A008F0F58 /* Node.swift in Sources */,
 			);
