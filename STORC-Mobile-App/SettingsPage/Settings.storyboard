@@ -12,7 +12,7 @@
         <!--Settings-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController id="Y6W-OH-hqX" sceneMemberID="viewController">
+                <viewController id="Y6W-OH-hqX" customClass="SettingsViewController" customModule="STORC_Mobile_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -27,20 +27,54 @@
                                 <color key="textColor" red="0.90232217189999997" green="0.61039441039999998" blue="0.61039441039999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xLu-PR-XlO">
+                                <rect key="frame" x="84" y="134" width="225" height="50"/>
+                                <color key="backgroundColor" red="0.90232217189999997" green="0.61039441039999998" blue="0.61039441039999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="0zz-yA-ki8"/>
+                                    <constraint firstAttribute="width" constant="225" id="bBN-U7-Q0C"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Sign Out"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="signOutButtonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="PUh-ld-tfb"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="xLu-PR-XlO" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="1Z5-Cj-xsE"/>
+                            <constraint firstItem="xLu-PR-XlO" firstAttribute="top" secondItem="enM-Nc-aVJ" secondAttribute="bottom" constant="39" id="35P-TW-WwP"/>
                             <constraint firstItem="enM-Nc-aVJ" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="ChH-7W-Sab"/>
                             <constraint firstItem="enM-Nc-aVJ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="uYS-1z-8Nq"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Settings" image="gearshape.fill" catalog="system" id="aBA-kE-OPY"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="u5i-rq-j1L" kind="show" identifier="SettingsToLogin" id="Sze-mX-hzd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-11.450381679389313" y="-27.464788732394368"/>
+        </scene>
+        <!--Login-->
+        <scene sceneID="1zJ-GE-Ouq">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Login" id="u5i-rq-j1L" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="qUS-pp-FXM"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yy6-Il-GAI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="575" y="-27"/>
         </scene>
     </scenes>
     <resources>
