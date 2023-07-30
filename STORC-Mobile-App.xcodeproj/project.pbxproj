@@ -63,6 +63,7 @@
 		772BCAFD2A7708370009CFF9 /* registrationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = registrationController.swift; sourceTree = "<group>"; };
 		772BCAFE2A7708370009CFF9 /* loginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = loginController.swift; sourceTree = "<group>"; };
 		772BCAFF2A7708370009CFF9 /* Sign-Up.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Sign-Up.storyboard"; sourceTree = "<group>"; };
+		772BCB042A7709610009CFF9 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		774B30A02A42712800C03BF7 /* TabBarController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TabBarController.storyboard; sourceTree = "<group>"; };
 		774B30A22A4271DC00C03BF7 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		774B30A72A42736300C03BF7 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
@@ -215,6 +216,7 @@
 		DD96B9A92A3387A90093BE16 = {
 			isa = PBXGroup;
 			children = (
+				772BCB042A7709610009CFF9 /* .gitignore */,
 				DD96B9B42A3387A90093BE16 /* STORC-Mobile-App */,
 				77F986A82A71833C008F0F58 /* STORC Watch App */,
 				DD96B9B32A3387A90093BE16 /* Products */,
