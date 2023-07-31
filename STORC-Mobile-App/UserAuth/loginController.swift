@@ -22,6 +22,27 @@ class loginController: UIViewController, WCSessionDelegate{
         session.activate()
     }
     
+    func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
+        let incomingDatapoint = message["message"] as? [Any]
+        print(incomingDatapoint, " THIS IS MESSAGE")
+        //let incomingDatapoint = message["message"] as? HeartRateDatapoint
+        //let HR = incomingDatapoint?.getHeartRateValue()
+        //let HRDate = incomingDatapoint?.getTimeStampValue()
+        let HR = incomingDatapoint?[0]
+        let HRDate = incomingDatapoint?[1]
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "hh:mm"
+        //print("\(HRTime!)")
+        
+        //need to differentiate between 1st and not 1st because if not some stuff wont work
+        //also preserves the order that stuff was sent in
+//        if(HRData.isEmpty == true){
+//            HRData.push(HeartRateDataPoint(heartRateValue: HR! as! Int, timeStamp: HRDate! as! Date))
+//        }else{
+//            HRData.append(HeartRateDataPoint(heartRateValue: HR! as! Int, timeStamp: HRDate! as! Date))
+//        }
+
+    }
     
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var passwordField: UITextField!

@@ -100,25 +100,26 @@ class HomePageViewController: UIViewController, WCSessionDelegate {
             dateOfMostRecentContractionLabel.text = "\(contractionValues.keys.max()!)"
             mostRecentContractionDate = contractionValues.keys.max()!
         }
-        
-        if(WCSession.isSupported()){
-            let session = WCSession.default
-            session.delegate = self
-            session.activate()
-        }
+//
+//        if(WCSession.isSupported()){
+//            let session = WCSession.default
+//            session.delegate = self
+//            session.activate()
+//        }
         
     }
     
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {}
-    
+
     func sessionDidBecomeInactive(_ session: WCSession) {}
-    
+
     func sessionDidDeactivate(_ session: WCSession) {
-        session.activate()
+        //session.activate()
     }
     
     func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
         let incomingDatapoint = message["message"] as? [Any]
+        print(incomingDatapoint, " THIS IS MESSAGE")
         //let incomingDatapoint = message["message"] as? HeartRateDatapoint
         //let HR = incomingDatapoint?.getHeartRateValue()
         //let HRDate = incomingDatapoint?.getTimeStampValue()

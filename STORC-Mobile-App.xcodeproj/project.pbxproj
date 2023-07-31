@@ -13,7 +13,7 @@
 		772BCB012A7708370009CFF9 /* registrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772BCAFD2A7708370009CFF9 /* registrationController.swift */; };
 		772BCB022A7708370009CFF9 /* loginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772BCAFE2A7708370009CFF9 /* loginController.swift */; };
 		772BCB032A7708370009CFF9 /* Sign-Up.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 772BCAFF2A7708370009CFF9 /* Sign-Up.storyboard */; };
-		772BCB092A770A680009CFF9 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772BCB052A770A670009CFF9 /* InterfaceController.swift */; };
+		772BCB092A770A680009CFF9 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772BCB052A770A670009CFF9 /* ContentViewModel.swift */; };
 		772BCB0F2A770A9E0009CFF9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 772BCB0E2A770A9E0009CFF9 /* Preview Assets.xcassets */; };
 		772BCB112A770AAE0009CFF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 772BCB102A770AAE0009CFF9 /* Assets.xcassets */; };
 		772BCB122A770B670009CFF9 /* STORC Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 77F986A72A71833C008F0F58 /* STORC Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -28,6 +28,7 @@
 		778860672A578FE1008FF5CD /* MovingAverageBasedContractionDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778860662A578FE1008FF5CD /* MovingAverageBasedContractionDetection.swift */; };
 		7788606B2A584A37008FF5CD /* STORCTabularClassifier Boosted Tree.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 7788606A2A584A37008FF5CD /* STORCTabularClassifier Boosted Tree.mlmodel */; };
 		7788606D2A584AA2008FF5CD /* ContractionMonitoringDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7788606C2A584AA2008FF5CD /* ContractionMonitoringDriver.swift */; };
+		77B7B6922A78044F00D8ECE7 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 77B7B6912A78044F00D8ECE7 /* IQKeyboardManagerSwift */; };
 		77C7A3332A67252D00E10CB4 /* HistoricalRecords.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77C7A3322A67252D00E10CB4 /* HistoricalRecords.storyboard */; };
 		77C7A3352A67277F00E10CB4 /* HistoricalRecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C7A3342A67277F00E10CB4 /* HistoricalRecordsViewController.swift */; };
 		77C7A3372A6727F300E10CB4 /* HistoricalRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C7A3362A6727F300E10CB4 /* HistoricalRecordTableViewCell.swift */; };
@@ -77,7 +78,7 @@
 		772BCAFE2A7708370009CFF9 /* loginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = loginController.swift; sourceTree = "<group>"; };
 		772BCAFF2A7708370009CFF9 /* Sign-Up.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Sign-Up.storyboard"; sourceTree = "<group>"; };
 		772BCB042A7709610009CFF9 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		772BCB052A770A670009CFF9 /* InterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		772BCB052A770A670009CFF9 /* ContentViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		772BCB0E2A770A9E0009CFF9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		772BCB102A770AAE0009CFF9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		772BCB152A772C1E0009CFF9 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -127,6 +128,7 @@
 			files = (
 				774B30A62A42734D00C03BF7 /* RevealingSplashView in Frameworks */,
 				774B309F2A40F8AC00C03BF7 /* Charts in Frameworks */,
+				77B7B6922A78044F00D8ECE7 /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,7 +215,7 @@
 				77F986BE2A718785008F0F58 /* STORC Watch App.entitlements */,
 				77F986B92A7186D8008F0F58 /* STORC-Watch-App-Info.plist */,
 				77F986A92A71833C008F0F58 /* STORCApp.swift */,
-				772BCB052A770A670009CFF9 /* InterfaceController.swift */,
+				772BCB052A770A670009CFF9 /* ContentViewModel.swift */,
 				77F986AB2A71833C008F0F58 /* ContentView.swift */,
 				772BCB102A770AAE0009CFF9 /* Assets.xcassets */,
 			);
@@ -314,6 +316,7 @@
 			packageProductDependencies = (
 				774B309E2A40F8AC00C03BF7 /* Charts */,
 				774B30A52A42734D00C03BF7 /* RevealingSplashView */,
+				77B7B6912A78044F00D8ECE7 /* IQKeyboardManagerSwift */,
 			);
 			productName = "STORC-Mobile-App";
 			productReference = DD96B9B22A3387A90093BE16 /* STORC-Mobile-App.app */;
@@ -349,6 +352,7 @@
 			packageReferences = (
 				774B309D2A40F8AC00C03BF7 /* XCRemoteSwiftPackageReference "Charts" */,
 				774B30A42A42734D00C03BF7 /* XCRemoteSwiftPackageReference "RevealingSplashView" */,
+				77B7B6902A78044F00D8ECE7 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = DD96B9B32A3387A90093BE16 /* Products */;
 			projectDirPath = "";
@@ -395,7 +399,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				772BCB092A770A680009CFF9 /* InterfaceController.swift in Sources */,
+				772BCB092A770A680009CFF9 /* ContentViewModel.swift in Sources */,
 				77F986AC2A71833C008F0F58 /* ContentView.swift in Sources */,
 				77F986AA2A71833C008F0F58 /* STORCApp.swift in Sources */,
 			);
@@ -457,7 +461,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"STORC Watch App/Preview Content\"";
-				DEVELOPMENT_TEAM = 3DG74M45D2;
+				DEVELOPMENT_TEAM = XGR4P4EPTG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "STORC-Watch-App-Info.plist";
@@ -466,16 +470,16 @@
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Used for contraction detection.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "We will use the HealthKit to detect contractions.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "ex.STORC-Mobile-App.gkb.personal";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "ex.STORC-Mobile-App.gkb.team";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "ex.STORC-Mobile-App.gkb.personal.storcwatchkitapp";
+				PRODUCT_BUNDLE_IDENTIFIER = "ex.STORC-Mobile-App.gkb.team.storcwatchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
+				SKIP_INSTALL = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -493,7 +497,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"STORC Watch App/Preview Content\"";
-				DEVELOPMENT_TEAM = 3DG74M45D2;
+				DEVELOPMENT_TEAM = XGR4P4EPTG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "STORC-Watch-App-Info.plist";
@@ -502,16 +506,16 @@
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Used for contraction detection.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "We will use the HealthKit to detect contractions.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "ex.STORC-Mobile-App.gkb.personal";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "ex.STORC-Mobile-App.gkb.team";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "ex.STORC-Mobile-App.gkb.personal.storcwatchkitapp";
+				PRODUCT_BUNDLE_IDENTIFIER = "ex.STORC-Mobile-App.gkb.team.storcwatchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
+				SKIP_INSTALL = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -643,20 +647,20 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3DG74M45D2;
+				DEVELOPMENT_TEAM = XGR4P4EPTG;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "STORC-Mobile-App/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "ex.STORC-Mobile-App.gkb.personal.storcwatchkitapp";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "ex.STORC-Mobile-App.gkb.team.storcwatchkitapp";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "ex.STORC-Mobile-App.gkb.personal";
+				PRODUCT_BUNDLE_IDENTIFIER = "ex.STORC-Mobile-App.gkb.team";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -675,20 +679,20 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3DG74M45D2;
+				DEVELOPMENT_TEAM = XGR4P4EPTG;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "STORC-Mobile-App/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "ex.STORC-Mobile-App.gkb.personal.storcwatchkitapp";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "ex.STORC-Mobile-App.gkb.team.storcwatchkitapp";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "ex.STORC-Mobile-App.gkb.personal";
+				PRODUCT_BUNDLE_IDENTIFIER = "ex.STORC-Mobile-App.gkb.team";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -746,6 +750,14 @@
 				kind = branch;
 			};
 		};
+		77B7B6902A78044F00D8ECE7 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -758,6 +770,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 774B30A42A42734D00C03BF7 /* XCRemoteSwiftPackageReference "RevealingSplashView" */;
 			productName = RevealingSplashView;
+		};
+		77B7B6912A78044F00D8ECE7 /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 77B7B6902A78044F00D8ECE7 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 

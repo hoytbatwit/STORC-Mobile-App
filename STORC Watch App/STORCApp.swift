@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WatchConnectivity
 
 @main
 struct STORC_Watch_AppApp: App {

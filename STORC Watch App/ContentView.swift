@@ -12,9 +12,13 @@ import HealthKit
 import WatchConnectivity
 import WatchKit
 
+
+var model = ContentViewModel()
+
 struct ContentView: View {
     @State var heartRateText = Text("text")
 
+    
     var body: some View {
         VStack {
             Image(systemName: "globe")
@@ -24,6 +28,11 @@ struct ContentView: View {
         }.onAppear{
             getAuth { (true) in
                 getHeartRateData { (true, heartRateValue) in
+                    DispatchQueue.main.async {
+                        //I think we will need to use transferUserInfo because that allows for background delivery need to use array to send it because we cant use linked list
+                        //WCSession.default.transferUserInfo(["message": self.backgroundHR])
+                        model.sendMessage(message: [heartRateValue])
+                    }
                     heartRateText = Text(heartRateValue + " HRV")
                 }
                 
@@ -97,8 +106,11 @@ func getHeartRateData(completion: @escaping (Bool, String) -> ()){
         }
     }
     */
+    
+    let devicePredicate = HKQuery.predicateForObjects(from: [HKDevice.local()])
+    
     //previously used HKAnchoredObjectQuery
-    let query = HKSampleQuery(sampleType: HKSampleType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!, predicate: nil, limit: Int(HKObjectQueryNoLimit), sortDescriptors: nil) { query, results, error in
+    let query = HKSampleQuery(sampleType: HKSampleType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!, predicate: devicePredicate, limit: Int(HKObjectQueryNoLimit), sortDescriptors: nil) { query, results, error in
         
         guard let samples = results as?
                 [HKQuantitySample] else {
@@ -118,8 +130,9 @@ func getHeartRateData(completion: @escaping (Bool, String) -> ()){
             //self.backgroundHR.append(temp)
             dispayHR = String(format: "%.2f%", HR)
             print(dispayHR + " DISPLAY HR")
-            completion(true, dispayHR)
         }
+        completion(true, dispayHR)
+
     }
     healthStore?.execute(query)
     //return dispayHR
