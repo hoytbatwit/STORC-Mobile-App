@@ -116,8 +116,10 @@ class MovingAverageBasedContractionDetection {
     
     
     private func checkIfStartOfContraction(current: Double, resting: Double) -> Bool{
-        let percent = 100 * (Double(current - resting) / Double(abs(resting)))
-        if(percent >= 6){
+        //let percent = 100 * (Double(current - resting) / Double(abs(resting)))
+        let first = current - resting
+        let percent = 100 * (first / resting)
+        if(percent >= 3){
             return true
         }
         return false
@@ -125,16 +127,20 @@ class MovingAverageBasedContractionDetection {
 
     
     private func checkIfEndOfContraction(peak: Double, current: Double) -> Bool{
-        let percent = 100 * (Double(current - peak) / Double(abs(peak)))
-        if(percent >= 6){
+        //let percent = 100 * (Double(current - peak) / Double(abs(peak)))
+        let first = peak - current
+        let percent = 100 * (first / peak)
+        if(percent >= 3){
             return true
         }
         return false
     }
     
     public func checkForPeakValue(current: Double, startHR: Double) -> Bool{
-        let percent = 100 * (Double(startHR - current) / Double(abs(startHR)))
-        if(percent >= 9){
+        //let percent = 100 * (Double(startHR - current) / Double(abs(startHR)))
+        let first = current - startHR
+        let percent = 100 * (first / startHR)
+        if(percent >= 3){
             return true
         }
         return false

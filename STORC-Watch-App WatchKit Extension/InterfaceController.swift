@@ -12,6 +12,7 @@ import WatchConnectivity
 
 
 class InterfaceController: WKInterfaceController, WCSessionDelegate {
+    //wanted to use HeartRateDatapoint to send data but since its custom its unsupported so we cant send it from watch to phone
     var backgroundHR = [Any]()
     
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
@@ -108,8 +109,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
                 //want to use this because passing in a whole date makes it easier for us to do other steps later
                 HRDate = sample.endDate
                 HR = sample.quantity.doubleValue(for: heartRateUnit)
-                //temp = HeartRateDatapoint(heartRateValue: HR, timeStamp: HRDate)
-                //self.backgroundHR.append(temp)
                 temp.append(HR)
                 temp.append(HRDate)
                 //self.backgroundHR.append(temp)

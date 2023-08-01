@@ -14,6 +14,7 @@ import Foundation
 class mainController: UIViewController, WCSessionDelegate {
     var HRData = LinkedList<HeartRateDatapoint>()
     var manualContractionTime = LinkedList<Int>()
+    var monitor = ContractionMonitoringDriver()
     var buttonState = 0
     var currentLength = 0
     var timer = Timer()
@@ -35,6 +36,7 @@ class mainController: UIViewController, WCSessionDelegate {
             session.delegate = self
             session.activate()
         }
+        ContractionDetection(input: self.HRData)
     }
         
         // setting up calendar for date range
@@ -117,11 +119,10 @@ class mainController: UIViewController, WCSessionDelegate {
         currentLength = currentLength + 1
         manualContractionLength.text = "Current Length of your contraction: \(currentLength) seconds"
     }
-    /*
-    func windowedContrctionDetection(input: LinkedList<HeartRateDatapoint>) {
-        MovingAverageBasedContractionDetection().monitor(heartRateValue: input, average: self.generateAverageHR(input: input))
+    
+    func ContractionDetection(input: LinkedList<HeartRateDatapoint>) {
+        monitor
     }
-     */
     
     func notifyUserOfContraction(){
         let alert = UIAlertController(title: "Contraction Detected", message: "We detected a contraction. Please check the contraction log and let us know if we were correct.", preferredStyle: .alert)

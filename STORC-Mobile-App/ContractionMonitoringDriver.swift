@@ -9,8 +9,6 @@ import Foundation
 import CoreML
 
 class ContractionMonitoringDriver {
-    
-    
     let newHeartRateValueReceivedNotificationName = Notification.Name("NewHeartRateValueReceived")
     let contractionDetectionNotificationName = Notification.Name("ContractionOccurredNotification")
     let movingAverageDetectionHandler = MovingAverageBasedContractionDetection()
