@@ -9,40 +9,7 @@ import UIKit
 import SwiftUI
 import WatchConnectivity
 
-class loginController: UIViewController, WCSessionDelegate{
-    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        
-    }
-    
-    func sessionDidBecomeInactive(_ session: WCSession) {
-        
-    }
-    
-    func sessionDidDeactivate(_ session: WCSession) {
-        session.activate()
-    }
-    
-    func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
-        let incomingDatapoint = message["message"] as? [Any]
-        print(incomingDatapoint, " THIS IS MESSAGE")
-        //let incomingDatapoint = message["message"] as? HeartRateDatapoint
-        //let HR = incomingDatapoint?.getHeartRateValue()
-        //let HRDate = incomingDatapoint?.getTimeStampValue()
-        let HR = incomingDatapoint?[0]
-        let HRDate = incomingDatapoint?[1]
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "hh:mm"
-        //print("\(HRTime!)")
-        
-        //need to differentiate between 1st and not 1st because if not some stuff wont work
-        //also preserves the order that stuff was sent in
-//        if(HRData.isEmpty == true){
-//            HRData.push(HeartRateDataPoint(heartRateValue: HR! as! Int, timeStamp: HRDate! as! Date))
-//        }else{
-//            HRData.append(HeartRateDataPoint(heartRateValue: HR! as! Int, timeStamp: HRDate! as! Date))
-//        }
-
-    }
+class loginController: UIViewController{
     
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var passwordField: UITextField!
@@ -52,12 +19,6 @@ class loginController: UIViewController, WCSessionDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if(WCSession.isSupported()){
-            let session = WCSession.default
-            session.delegate = self
-            session.activate()
-        }
     }
     
     //When user does not have account send them to sign up page

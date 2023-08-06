@@ -93,7 +93,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jdX-JC-lnB">
                                 <rect key="frame" x="213" y="509" width="160" height="217"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="86" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JyX-Bz-ydW">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="N/A" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JyX-Bz-ydW">
                                         <rect key="frame" x="23" y="33" width="116" height="93"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="93" id="XcN-GW-0qn"/>
@@ -197,6 +197,7 @@
                     <connections>
                         <outlet property="bpmLabel" destination="ZML-JF-Frg" id="fcl-pN-euG"/>
                         <outlet property="dateOfMostRecentContractionLabel" destination="eFh-Gx-MIp" id="Pn6-GY-SGk"/>
+                        <outlet property="detectedHRLabel" destination="JyX-Bz-ydW" id="m4s-Eu-m1D"/>
                         <outlet property="historicalRecordsCountLabel" destination="PfB-2j-b2j" id="eKE-zK-Qut"/>
                         <outlet property="historicalRecordsView" destination="yFZ-nk-Hhe" id="Cm9-fc-9x7"/>
                         <outlet property="lastRecordedContractionView" destination="0PU-bz-hI1" id="FAE-4K-8HH"/>

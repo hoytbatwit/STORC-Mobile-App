@@ -1,45 +1,33 @@
 //
 //  ContentView.swift
-//  STORC Watch App
+//  WatchApp WatchKit Extension
 //
-//  Created by Gabriel Baffo on 7/26/23.
+//  Created by Brian H on 8/3/23.
 //
 
 import SwiftUI
 import HealthKit
-import Foundation
-import HealthKit
-import WatchConnectivity
-import WatchKit
-
-
-var model = ContentViewModel()
 
 struct ContentView: View {
-    @State var heartRateText = Text("text")
-
+    var model = WatchConectControll()
+    @State var messageText = ""
+    
     
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            heartRateText
-        }.onAppear{
-            getAuth { (true) in
-                getHeartRateData { (true, heartRateValue) in
-                    DispatchQueue.main.async {
-                        //I think we will need to use transferUserInfo because that allows for background delivery need to use array to send it because we cant use linked list
-                        //WCSession.default.transferUserInfo(["message": self.backgroundHR])
-                        model.sendMessage(message: [heartRateValue])
-                    }
-                    heartRateText = Text(heartRateValue + " HRV")
-                }
-                
+        VStack{
+            Label("", systemImage: "heart.fill")
+            Button(action: {
+                getAuth()
+//                self.model.session.sendMessage(["message": self.messageText], replyHandler: nil) { (error) in print(error.localizedDescription)}
+            }){
+                Text("Send Message")
             }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .accentColor(Color.black)
+        .background(Color.pink)
     }
-}
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
@@ -47,93 +35,48 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
-var backgroundHR = [Any]()
-var healthStore : HKHealthStore?
-
-
-func getAuth(completion: @escaping (Bool) -> ()){
-    //will ensure that health data is available
-    if HKHealthStore.isHealthDataAvailable() {
+func getAuth(){
+    var healthStore : HKHealthStore?
+    
+    if HKHealthStore.isHealthDataAvailable(){
         healthStore = HKHealthStore()
     }else{
         //no health data available
-        print("Error health store is unavailable")
+        print("error health data unavailable")
     }
     
-    //Request read/write access to Heart Rate Data
-    let dataTypes = Set([HKObjectType.quantityType(forIdentifier: .heartRate)!])
-    healthStore?.requestAuthorization(toShare: dataTypes, read: dataTypes) { success, error in
-        //We got authorization
+    let dataType = Set([HKObjectType.quantityType(forIdentifier: .heartRate)!])
+    healthStore?.requestAuthorization(toShare: dataType, read: dataType) { success, error in
         if success{
             print("Health auth successfull")
-            completion(true)
         }else{
-            //there was an error we can retry throw error or ask again?
-            print("Error unable to get read and write access.")
+            //error
+            print("unable to get read or write access")
         }
     }
-}
-
-func getHeartRateData(completion: @escaping (Bool, String) -> ()){
-    print("trying to get heart rate from the watch")
     let heartRateUnit:HKUnit = HKUnit(from: "count/min")
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "hh:mm"
-    
-    var dispayHR:String = ""
-    var HRDate:Date = Date.now
-    var HR:Double = 0.0
-    //var temp:HeartRateDatapoint = HeartRateDatapoint(heartRateValue: HR, timeStamp: HRDate)
-    var temp = [Any]()
-    /*
-    //so that sample comes from apple watch rather than from the healthstore
-    let devicePredicate = HKQuery.predicateForObjects(from: [HKDevice.local()])
-    
-    let updateHandler: (HKAnchoredObjectQuery, [HKSample]?, [HKDeletedObject]?, HKQueryAnchor?, Error?) -> Void = {
-        query, samples, deletedObjects, queryAnchor, error in
+    var HR: Double = 0.0
+    let query = HKSampleQuery(sampleType: HKSampleType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!, predicate: nil, limit: Int(HKObjectQueryNoLimit), sortDescriptors: nil)  { query, results, error in
         
-        guard let samples = samples as? [HKQuantitySample] else {
+        guard let samples = results as? [HKQuantitySample] else{
+            print("Error")
             return
         }
         
         for sample in samples {
-            a = String(format: ".2f%", sample.quantity.doubleValue(for: heartRateUnit))
-            print(a)
-        }
-        
-        DispatchQueue.main.async {
-            self.testOutput.setText(a)
-        }
-    }
-    */
-    
-    let devicePredicate = HKQuery.predicateForObjects(from: [HKDevice.local()])
-    
-    //previously used HKAnchoredObjectQuery
-    let query = HKSampleQuery(sampleType: HKSampleType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!, predicate: devicePredicate, limit: Int(HKObjectQueryNoLimit), sortDescriptors: nil) { query, results, error in
-        
-        guard let samples = results as?
-                [HKQuantitySample] else {
-            print("There was an error")
-            return
-        }
-        print("\(results) Results")
-
-        for sample in samples {
-            //want to use this because passing in a whole date makes it easier for us to do other steps later
-            HRDate = sample.endDate
             HR = sample.quantity.doubleValue(for: heartRateUnit)
-            //temp = HeartRateDatapoint(heartRateValue: HR, timeStamp: HRDate)
-            //self.backgroundHR.append(temp)
-            temp.append(HR)
-            temp.append(HRDate)
-            //self.backgroundHR.append(temp)
-            dispayHR = String(format: "%.2f%", HR)
-            print(dispayHR + " DISPLAY HR")
         }
-        completion(true, dispayHR)
-
+        
+        print(HR)
+        
+        DispatchQueue.main.async{
+            //add in code here to display text to user so it can be seen and can be sent
+            print("Do we enter here or no")
+            self.model.session.sendMessage(["HRData": HR], replyHandler: nil) { (error) in print("There was an error sending the message")}
+        }
     }
     healthStore?.execute(query)
-    //return dispayHR
 }
+
+}
+    

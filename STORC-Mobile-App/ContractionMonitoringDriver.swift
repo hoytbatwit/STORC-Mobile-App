@@ -56,6 +56,8 @@ class ContractionMonitoringDriver {
             // Save contraction.
             if(saveDataToCoreData(heartRateValueList: heartRateValuesList) == true){
                 showContractionAlert()
+                let contractionConfirmedNotificationName = NSNotification.Name(rawValue:"ContractionConfirmedNotification")
+                NotificationCenter.default.post(name: contractionConfirmedNotificationName, object: nil)
             }
             
             // Notify user that a contraction occured, update relevant main pages, save contraction.

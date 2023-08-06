@@ -24,6 +24,8 @@ class HomePageViewController: UIViewController, WCSessionDelegate {
     
     @IBOutlet weak var bpmLabel: UILabel!
     
+    @IBOutlet weak var detectedHRLabel: UILabel!
+    
     @IBAction func detailedBreakdownButtonPressed(_ sender: Any) {
         if(!contractionValues.isEmpty){
             self.performSegue(withIdentifier: "viewDetailedBreakdownPressed", sender: self)
@@ -39,26 +41,60 @@ class HomePageViewController: UIViewController, WCSessionDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         context = appDelegate.persistentContainer.viewContext
         
-        contractionValues = getContractions()
-        
-        mostRecentContraction = contractionValues[contractionValues.keys.max() ?? Date.now] ?? [:]
-        
-        // Do any additional setup after loading the view.
-        if(!contractionValues.isEmpty){
-            setupRecentContractionHRChart(dataPoints: mostRecentContraction)
-        }
-        
         setupLastRecordedContractionView()
         setupHistoricalRecordsView()
+        fillViewsWithMostRecentContractionData()
+                
+        let contractionConfirmedNotificationName = NSNotification.Name(rawValue:"ContractionConfirmedNotification")
+        NotificationCenter.default.addObserver(self, selector: #selector(fillViewsWithMostRecentContractionData), name: contractionConfirmedNotificationName, object: nil)
         
-        let maxBPM = mostRecentContraction.values.max()
-        let minBPM = mostRecentContraction.values.min()
+        pushValidContraction()
         
-        bpmLabel.text = "\(maxBPM ?? 0) / \(minBPM ?? 0) BPM"
+        if(WCSession.isSupported()){
+            let session = WCSession.default
+            session.delegate = self
+        }
         
+    }
+    
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {}
+
+    func sessionDidBecomeInactive(_ session: WCSession) {}
+
+    func sessionDidDeactivate(_ session: WCSession) {
+        //session.activate()
+    }
+    
+    func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
+        if(message.isEmpty || message["HRData"] == nil){
+            return
+        }
+        let incomingDatapoint = message["HRData"]
+        print("home page controller")
+
+        //let incomingDatapoint = message["message"] as? HeartRateDatapoint
+        //let HR = incomingDatapoint?.getHeartRateValue()
+        //let HRDate = incomingDatapoint?.getTimeStampValue()
+        let HR = incomingDatapoint as! Int
+        print(HR, " THIS IS HR")
+
+        //need to differentiate between 1st and not 1st because if not some stuff wont work
+        //also preserves the order that stuff was sent in
+//        if(HRData.isEmpty == true){
+//            HRData.push(HeartRateDataPoint(heartRateValue: HR! as! Int, timeStamp: HRDate! as! Date))
+//        }else{
+//            HRData.append(HeartRateDataPoint(heartRateValue: HR! as! Int, timeStamp: HRDate! as! Date))
+//        }
+        DispatchQueue.main.async {
+            self.detectedHRLabel.text = "\(HR)"
+        }
+    }
+    
+    func pushValidContraction(){
         let potentialContractionHeartRateDataPointList = [        HeartRateDataPoint(heartRateValue: 78, timeStamp: 0),
             HeartRateDataPoint(heartRateValue: 78, timeStamp: 0.05),
             HeartRateDataPoint(heartRateValue: 78, timeStamp: 0.10),
@@ -90,58 +126,11 @@ class HomePageViewController: UIViewController, WCSessionDelegate {
             potentialContractionHeartRateDataPointLinkedList.append(heartRateDataPoint)
         }
         
-        print(potentialContractionHeartRateDataPointLinkedList)
-        
         let notificationName = Notification.Name(rawValue: "NewHeartRateValueReceived")
         NotificationCenter.default.post(name: notificationName, object: potentialContractionHeartRateDataPointLinkedList)
-        
-        historicalRecordsCountLabel.text = "\(contractionValues.count)"
-        if(!contractionValues.isEmpty){
-            dateOfMostRecentContractionLabel.text = "\(contractionValues.keys.max()!)"
-            mostRecentContractionDate = contractionValues.keys.max()!
-        }
-//
-//        if(WCSession.isSupported()){
-//            let session = WCSession.default
-//            session.delegate = self
-//            session.activate()
-//        }
-        
+
     }
     
-    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {}
-
-    func sessionDidBecomeInactive(_ session: WCSession) {}
-
-    func sessionDidDeactivate(_ session: WCSession) {
-        //session.activate()
-    }
-    
-    func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
-        let incomingDatapoint = message["message"] as? [Any]
-        print(incomingDatapoint, " THIS IS MESSAGE")
-        //let incomingDatapoint = message["message"] as? HeartRateDatapoint
-        //let HR = incomingDatapoint?.getHeartRateValue()
-        //let HRDate = incomingDatapoint?.getTimeStampValue()
-        let HR = incomingDatapoint?[0]
-        let HRDate = incomingDatapoint?[1]
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "hh:mm"
-        //print("\(HRTime!)")
-        
-        //need to differentiate between 1st and not 1st because if not some stuff wont work
-        //also preserves the order that stuff was sent in
-//        if(HRData.isEmpty == true){
-//            HRData.push(HeartRateDataPoint(heartRateValue: HR! as! Int, timeStamp: HRDate! as! Date))
-//        }else{
-//            HRData.append(HeartRateDataPoint(heartRateValue: HR! as! Int, timeStamp: HRDate! as! Date))
-//        }
-        DispatchQueue.main.async {
-            self.bpmLabel.text = String(HR! as! Int)
-        }
-    }
-    
-
     func setupHistoricalRecordsView(){
         historicalRecordsView.layer.cornerRadius = 10
     }
@@ -150,6 +139,29 @@ class HomePageViewController: UIViewController, WCSessionDelegate {
         lastRecordedContractionView.layer.cornerRadius = 10
         lastRecordedContractionView.layer.borderWidth = 1
         lastRecordedContractionView.layer.borderColor = UIColor(red: 242/255, green: 165/255, blue: 163/255, alpha: 1.0).cgColor
+    }
+    
+    @objc func fillViewsWithMostRecentContractionData(){
+        contractionValues = getContractions()
+        
+        mostRecentContraction = contractionValues[contractionValues.keys.max() ?? Date.now] ?? [:]
+        
+        if(!contractionValues.isEmpty){
+            setupRecentContractionHRChart(dataPoints: mostRecentContraction)
+        }
+        
+        let maxBPM = mostRecentContraction.values.max()
+        let minBPM = mostRecentContraction.values.min()
+        
+        bpmLabel.text = "\(maxBPM ?? 0) / \(minBPM ?? 0) BPM"
+        
+        historicalRecordsCountLabel.text = "\(contractionValues.count)"
+        
+        if(!contractionValues.isEmpty){
+            dateOfMostRecentContractionLabel.text = "\(contractionValues.keys.max()!)"
+            mostRecentContractionDate = contractionValues.keys.max()!
+        }
+        
     }
     
     
