@@ -7,14 +7,41 @@
 
 import UIKit
 import CoreData
+import IQKeyboardManagerSwift
+import WatchConnectivity
+
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
-
+class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        print("activation completed.")
+        print("ERROR? ", error)
+    }
+    
+    func sessionDidBecomeInactive(_ session: WCSession) {
+    }
+    
+    func sessionDidDeactivate(_ session: WCSession) {
+        session.activate()
+    }
+    
+    
+    func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
+        let incomingDatapoint = message["HRData"] as? [Any]
+        print(incomingDatapoint, " THIS IS MESSAGE")
+        print("app delegate")
+    }
+    
+        
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        IQKeyboardManager.shared.enable = true
+        if WCSession.isSupported() {
+            let wcsession = WCSession.default
+            wcsession.delegate = self
+            wcsession.activate()
+        }
+
         return true
     }
 
@@ -23,6 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         // Called when a new scene session is being created.
         // Use this method to select a configuration to create the new scene with.
+        
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
 
