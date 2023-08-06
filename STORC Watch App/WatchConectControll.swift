@@ -8,6 +8,9 @@
 import Foundation
 import WatchConnectivity
 
+/**
+ * This class manages the WCSession, allowing for communication between the iPhone and Apple Watch device.
+ */
 class WatchConectControll: NSObject, WCSessionDelegate{
     var session: WCSession
     init(session : WCSession = .default){

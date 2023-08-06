@@ -10,7 +10,6 @@ import CoreData
 class HistoricalRecordsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
    
     var context:NSManagedObjectContext!
-
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return contractionsList.count
@@ -19,12 +18,9 @@ class HistoricalRecordsViewController: UIViewController, UITableViewDelegate, UI
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HistoricalRecordCell", for: indexPath) as! HistoricalRecordTableViewCell
         cell.bgView.layer.cornerRadius = 10
-        
         let maxValue = contractionsList[indexPath.row].first?.value.values.max()
         let minValue = contractionsList[indexPath.row].first?.value.values.min()
-                
         cell.bpmLabel.text = "\(maxValue ?? -1) / \(minValue ?? -1) BPM"
-        
         cell.dateTimeLabel.text = "\(contractionsList[indexPath.row].first?.key ?? Date.distantFuture)"
         return cell
     }
@@ -34,7 +30,6 @@ class HistoricalRecordsViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         selectedContractionDate = contractionsList[indexPath.row].first?.key ?? Date.distantFuture
         selectedHRDataPoints = contractionsList[indexPath.row].first?.value ?? [:]
         selectedContractionHRValues = (contractionsList[indexPath.row].first?.value.values.map({ hrValue in
@@ -50,7 +45,6 @@ class HistoricalRecordsViewController: UIViewController, UITableViewDelegate, UI
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "historicalRecordsToDetailedBreakdown"){
             let vc = segue.destination as! DetailedBreakdownViewController
-            
             vc.contractionDate = selectedContractionDate
             vc.contractionHRDataPoints = selectedHRDataPoints
             vc.contractionHRValues = selectedContractionHRValues
@@ -67,18 +61,20 @@ class HistoricalRecordsViewController: UIViewController, UITableViewDelegate, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         context = appDelegate.persistentContainer.viewContext
+        
         var unmodifiedContractionsList = getContractions()
-
         for contractionKey in unmodifiedContractionsList.keys {
             contractionsList.append([contractionKey : unmodifiedContractionsList[contractionKey]!])
         }
         
     }
     
+    /**
+     * Returns  a list of all previously detected contractions from CoreData.
+     */
     func getContractions() -> [Date : [Double: Int]]{
         var contractionDataPoints = [Date : [Double: Int]]()
         
@@ -118,17 +114,4 @@ class HistoricalRecordsViewController: UIViewController, UITableViewDelegate, UI
             return [:]
         }
     }
-
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

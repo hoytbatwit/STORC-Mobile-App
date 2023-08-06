@@ -13,6 +13,8 @@ import WatchConnectivity
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
+    
+    // WC Session setup for communication between Apple Watch and iPhone
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         print("activation completed.")
         print("ERROR? ", error)
@@ -25,17 +27,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         session.activate()
     }
     
-    
     func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
         let incomingDatapoint = message["HRData"] as? [Any]
         print(incomingDatapoint, " THIS IS MESSAGE")
         print("app delegate")
     }
     
-        
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // Enables Keyboard Manager plugin for intelligent Keyboard support.
         IQKeyboardManager.shared.enable = true
+        
         if WCSession.isSupported() {
             let wcsession = WCSession.default
             wcsession.delegate = self

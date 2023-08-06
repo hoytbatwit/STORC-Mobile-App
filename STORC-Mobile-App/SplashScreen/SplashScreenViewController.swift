@@ -13,7 +13,7 @@ class SplashScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // Shows STORC Logo splah screen upon app launch.
         let splashView = RevealingSplashView(iconImage: UIImage(named: "STORCWhite")!, iconInitialSize: CGSize(width: 75, height: 75), backgroundColor: UIColor(red: 242/255, green: 165/255, blue: 163/255, alpha: 1.0))
         
         splashView.duration = 2

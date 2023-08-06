@@ -7,6 +7,9 @@
 
 import Foundation
 
+/**
+ * This class represents a single Heart Rate Data Point, containing its timestamp and corresponding heart rate value.
+ */
 class HeartRateDataPoint {
     private var heartRateValue : Int
     private let timeStamp : Double

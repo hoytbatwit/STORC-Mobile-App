@@ -8,6 +8,7 @@ import Foundation
 
 class MovingAverageBasedContractionDetection {
     public func monitor(heartRateValue: LinkedList<HeartRateDataPoint>, average: Int){
+        // List used to store potential contraction values once a contraction has started.
         var currentContractionValues = LinkedList<HeartRateDataPoint>()
         
         var isContractionOccuring = false;
@@ -17,12 +18,15 @@ class MovingAverageBasedContractionDetection {
         //var contractionPeakHR = HeartRateDatapoint(heartRateValue: 0.0, timeStamp: Date.now)
         var contractionPeakHR = HeartRateDataPoint(heartRateValue: Int.min, timeStamp: 0.0)
         
+        // Iterates through the provided heartRateValue LinkedList.
         for currentHeartRateDataPoint in heartRateValue {
+            // If we have found a new peak heart rate, set this as the contraction peak HR.
             if(contractionPeakHR.getHeartRateValue() < currentHeartRateDataPoint.value.getHeartRateValue()){
                 contractionPeakHR = currentHeartRateDataPoint.value
             }
             
             if(isContractionOccuring){
+                // If a contraction is occuring, check to see if the currently iterated upon value corresponds to the end of the contraction.
                 if(checkIfEndOfContraction(peak: contractionPeakHR.getHeartRateValue(), current: currentHeartRateDataPoint.value.getHeartRateValue())){
                     isContractionOccuring = false
                     
@@ -36,20 +40,24 @@ class MovingAverageBasedContractionDetection {
                 
                     currentContractionValues.append(currentHeartRateDataPoint.value)
 
+                    // Notifies the contraction driver that a new contraction has been detected for processing by the ML model.
                     let notificationName = Notification.Name("ContractionOccurredNotification")
                     NotificationCenter.default.post(name: notificationName, object: currentContractionValues)
                     
+                    // Remove the stored values for the just found contraction and continue iterating over the LinkedList.
                     for _ in currentContractionValues{
                         currentContractionValues.pop()
                     }
                     continue
                 }else {
+                    // If the contraction is not ending, check to see if we have a new peak for the current contraction.
                     if(checkForPeakValue(current: currentHeartRateDataPoint.value.getHeartRateValue(), startHR: contractionStartDataPoint.getHeartRateValue())) {
                         contractionPeakHR = currentHeartRateDataPoint.value
                     }
                     currentContractionValues.append(currentHeartRateDataPoint.value)
                 }
             }else {
+                // If a contraction is detected to be occuring, this sets the isContractionOccuring state to true and begins recording the heart rate values.
                 if(checkIfStartOfContraction(current: currentHeartRateDataPoint.value.getHeartRateValue(), resting: average)) {
                     isContractionOccuring = true
                     contractionStartDataPoint = HeartRateDataPoint(heartRateValue: currentHeartRateDataPoint.value.getHeartRateValue(), timeStamp: currentHeartRateDataPoint.value.getTimeStampValue())
@@ -67,7 +75,13 @@ class MovingAverageBasedContractionDetection {
         }
         
     }
-    
+    /**
+     * Given a LinkedList of HeartRateDataPoints, determines the peak.
+     *
+     * @param heartRateDataPoints The LinkedList of HeartRateDataPoints to check.
+     *
+     * @returns Int An integer value represent the peak heart rate value.
+     */
     private func determinePeakDuringContraction(heartRateDataPoints: LinkedList<HeartRateDataPoint>) -> Int{
         var peak = 0
         for heartRateDataPoint in heartRateDataPoints {
@@ -78,7 +92,14 @@ class MovingAverageBasedContractionDetection {
         return peak
     }
     
-    
+    /**
+     * Given a LinkedList of HeartRateDataPoints, determines if the trends in the data correspond to those representing the start of a contraction ( >= 6% HR increase).
+     *
+     * @param current The current heart rate value.
+     * @param resting The resting heart rate value.
+     *
+     * @returns Bool A boolean denoting whether or not it is likely that a contraction has begun.
+     */
     private func checkIfStartOfContraction(current: Int, resting: Int) -> Bool{
         let percent = 100 * (Double(current - resting) / Double(abs(resting)))
         if(percent >= 6){
@@ -87,7 +108,14 @@ class MovingAverageBasedContractionDetection {
         return false
     }
 
-    
+    /**
+     * Given a LinkedList of HeartRateDataPoints, determines if the trends in the data correspond to those representing the end of a contraction ( >= 6% HR decrease).
+     *
+     * @param current The current heart rate value.
+     * @param resting The resting heart rate value.
+     *
+     * @returns Bool A boolean denoting whether or not it is likely that a contraction has ended.
+     */
     private func checkIfEndOfContraction(peak: Int, current: Int) -> Bool{
         let percent = 100 * (Double(current - peak) / Double(abs(peak)))
         print("Percent ", percent, " ", current, " ", peak)
@@ -97,6 +125,14 @@ class MovingAverageBasedContractionDetection {
         return false
     }
     
+    /**
+     * Checks for a > %9 heart rate jump given the current heart rate and the start-of-contraction heart rate.
+     *
+     * @param current The current heart rate value.
+     * @param startHR The starting heart rate of the contraction.
+     *
+     * @returns Bool A boolean representing whether there was a > 9% increase in the two heart rate values.
+     */
     public func checkForPeakValue(current: Int, startHR: Int) -> Bool{
         let percent = 100 * (Double(startHR - current) / Double(abs(startHR)))
         if(percent >= 9){
@@ -104,27 +140,4 @@ class MovingAverageBasedContractionDetection {
         }
         return false
     }
-    
-//    public func generateMovingAverage(input: LinkedList<HeartRateDataPoint>) -> LinkedList<HeartRateDataPoint>{
-//        var results = LinkedList<HeartRateDataPoint>()
-//        // LinkedList Implementation
-//        var size = 5.0
-//        var sum = 0.0
-//        for currentHeartRateDataPoint in input {
-//            sum = sum + Double(currentHeartRateDataPoint.value.getHeartRateValue())
-//            // Add to LinkedList
-//            // Check Size and remove
-//            
-//            var newValue = Int(sum / size)
-//            var newData = HeartRateDataPoint(heartRateValue: newValue, timeStamp: currentHeartRateDataPoint.value.getTimeStampValue())
-//            if(results.isEmpty == true){
-//                results.push(newData)
-//            }else{
-//                results.append(newData)
-//            }
-//            results.append(newData)
-//        }
-//        
-//        return results
-//    }
 }

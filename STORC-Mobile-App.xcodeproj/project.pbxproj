@@ -658,6 +658,9 @@
 				DEVELOPMENT_TEAM = XGR4P4EPTG;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "STORC-Mobile-App/Info.plist";
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "Used for contraction detection.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Used for contraction detection.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Used for contraction detection.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -690,6 +693,9 @@
 				DEVELOPMENT_TEAM = XGR4P4EPTG;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "STORC-Mobile-App/Info.plist";
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "Used for contraction detection.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Used for contraction detection.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Used for contraction detection.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

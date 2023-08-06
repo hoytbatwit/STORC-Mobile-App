@@ -22,19 +22,20 @@ class DetailedBreakdownViewController: UIViewController {
         self.dismiss(animated: true)
     }
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
         setupRecentContractionHRChart(dataPoints: contractionHRDataPoints)
         contractionDateLabel.text = "\(contractionDate)"
         contractionBPMLabel.text = "\(contractionHRValues.max() ?? -1) / \(contractionHRValues.min() ?? -1) BPM"
     }
     
+    /**
+     * Sets up the chart displaying information regarding the most recently detected contraction.
+     *
+     * @param dataPoints The data points to display on the graph.
+     */
     func setupRecentContractionHRChart(dataPoints: [Double: Int]){
-        
         let dataSet = LineChartDataSet()
         for dataPoint in dataPoints {
             dataSet.addEntryOrdered(ChartDataEntry(x: dataPoint.key, y: Double(dataPoint.value)))
@@ -73,16 +74,4 @@ class DetailedBreakdownViewController: UIViewController {
         recentContractionHRChart.autoScaleMinMaxEnabled = false
         recentContractionHRChart.data = data
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

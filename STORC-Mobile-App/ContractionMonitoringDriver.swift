@@ -10,40 +10,84 @@ import CoreML
 import CoreData
 import UIKit
 
+/**
+ * This class contains functions and logic to combine the moving average contraction detection method and the ML  based contraction detection model.
+ */
 class ContractionMonitoringDriver {
-    
     let movingAverageDetectionHandler = MovingAverageBasedContractionDetection()
     var context:NSManagedObjectContext!
 
-    
+    // Initializes the driver.
     init() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        context = appDelegate.persistentContainer.viewContext
+        context = appDelegate.persistentContainer.viewContext // Context for saving to CoreData
         
         let newHeartRateValueReceivedNotificationName = NSNotification.Name(rawValue:"NewHeartRateValueReceived")
         let contractionDetectionNotificationName = NSNotification.Name(rawValue:"ContractionOccurredNotification")
         
-        // Will call monitor contraction each time a new heart rate is received.
+        // Will call monitorContraction each time a new heart rate is received.
         NotificationCenter.default.addObserver(self, selector: #selector(monitorContraction), name: newHeartRateValueReceivedNotificationName, object: nil)
         
-        // Will call check if valid contraction when a contraction suspected notification is sent by the window based monitor.
+        // Will call checkIfValidContraction when a contraction suspected notification is sent by the window based monitor.
         NotificationCenter.default.addObserver(self, selector: #selector(checkIfValidContraction), name: contractionDetectionNotificationName, object: nil)
     }
     
+    /**
+     * Triggers the window based monitoring algorithm.
+     *
+     * @param notification The NSNotification object that contains the hear rate data points linked list, sent by the sender (or poster) of this notification.
+     *
+     */
     @objc private func monitorContraction(_ notification: NSNotification) {
-        print("Called monitor")
         let heartRateDataPointList = notification.object as! LinkedList<HeartRateDataPoint>
-        print(heartRateDataPointList, " DP LIST DRIVER")
-        movingAverageDetectionHandler.monitor(heartRateValue: heartRateDataPointList, average: 0)
+        movingAverageDetectionHandler.monitor(heartRateValue: heartRateDataPointList, average: Int(generateMovingAverage(input: heartRateDataPointList)))
     }
     
+    /**
+     * Generates a moving average of the Heart Rate values present in the LinkedList.
+     *
+     * @param input The LinkedList of HeartRateDataPoints to generate the moving averages for.
+     *
+     * @returns A double with the moving average factored in for all HR values.
+     *
+     */
+    public func generateMovingAverage(input: LinkedList<HeartRateDataPoint>) -> Double{
+        var results = LinkedList<HeartRateDataPoint>()
+        // LinkedList Implementation
+        var size = Double(input.length)
+        var sum = 0.0
+        for currentHeartRateDataPoint in input {
+            sum = sum + Double(currentHeartRateDataPoint.value.getHeartRateValue())
+            // Add to LinkedList
+            // Check Size and remove
+            
+            var newValue = sum / size
+            var newData = HeartRateDataPoint(heartRateValue: Int(newValue), timeStamp: currentHeartRateDataPoint.value.getTimeStampValue())
+            if(results.isEmpty == true){
+                results.push(newData)
+            }else{
+                results.append(newData)
+            }
+            results.append(newData)
+        }
+        
+        return sum/size
+    }
+    
+    
+    /**
+     * Checks if a contraction is valid using the STORCTabularClassifier_Boosted_Tree ML Model. If valid, the contraction is saved to Core Data and the user is notified.
+     *
+     * @param notification The NSNotification object that contains the hear rate data points linked list, sent by the sender (or poster) of this notification.
+     *
+     */
     @objc private func checkIfValidContraction(_ notification: NSNotification) {
         let potentialContractionHeartRateDataPointLinkedList = notification.object as! LinkedList<HeartRateDataPoint>
         let accuracyThreshold = 0.75
         if(makePredictionBasedOnModel(heartRateDataPointsLinkedList: potentialContractionHeartRateDataPointLinkedList) > accuracyThreshold){
             print("Valid Contraction Occurred.")
             
-            // Add to list for saving via core data.
+            // Adds the confirmed contraction heart rate values to an array to allow for saving via core data.
             var heartRateValuesList = [Int]()
             
             let potentialContractionHeartRateDataPointList = convertLinkedListTo19MostRecent(heartRateDataPointLinkedList: potentialContractionHeartRateDataPointLinkedList)
@@ -52,20 +96,25 @@ class ContractionMonitoringDriver {
                 heartRateValuesList.append(heartRateDataPoint.getHeartRateValue())
             }
             
-            print(heartRateValuesList, "HRV Values list")
             // Save contraction.
             if(saveDataToCoreData(heartRateValueList: heartRateValuesList) == true){
                 showContractionAlert()
+                
+                // Notifies the user that a contraction occured, sends a notification to the controller(s) of the relevant UI Pages, save contraction.
                 let contractionConfirmedNotificationName = NSNotification.Name(rawValue:"ContractionConfirmedNotification")
                 NotificationCenter.default.post(name: contractionConfirmedNotificationName, object: nil)
             }
-            
-            // Notify user that a contraction occured, update relevant main pages, save contraction.
-            // Removed code for push, not functional yet.
-            
         }
     }
     
+    /**
+     * Saves a contraction to Core Data.
+     *
+     * @param heartRateValueList The list of heart rate values to save to Core Data.
+     *
+     * @returns Bool Indicates whether or not the data was successfully saved to Core Data.
+     *
+     */
     func saveDataToCoreData(heartRateValueList: [Int]) -> Bool{
         print(heartRateValueList, " Saving this list")
         // Set of Doubles
@@ -89,6 +138,7 @@ class ContractionMonitoringDriver {
 
     }
     
+    // Shows an alert to the user notifying them that a contraction occurred.
     func showContractionAlert() {
         // create the alert
         let alert = UIAlertController(title: "Contraction Detected", message: "Please view your dashboard for more information.", preferredStyle: UIAlertController.Style.alert)
@@ -107,21 +157,23 @@ class ContractionMonitoringDriver {
         }
     }
     
-    // Queue up 19 heart rate values, check and repeat. Can only accept 19 values currently.
-    // Finish this function.
+    /**
+     * This functinon checks 19 heart rate values at a time using the  STORCTabularClassifier_Boosted_Tree ML model for trends consistent with a contraction.
+     *
+     * @param heartRateDataPointsLinkedList The LinkedList of heart rate values that need to be checked.
+     *
+     * @returns Double A double from 0 to 1 representing the percentage chance that these values correspond to a contraction.
+     *
+     */
     private func makePredictionBasedOnModel(heartRateDataPointsLinkedList: LinkedList<HeartRateDataPoint>) -> Double {
         let heartRateDataPoints = convertLinkedListTo19MostRecent(heartRateDataPointLinkedList: heartRateDataPointsLinkedList)
         
+        // Return if there are not enough heartRateDataPoints to make a prediction.
         if(heartRateDataPoints.count < 19){
-            print(heartRateDataPoints.count, "We are here")
-
             return 0
         }
         
-        heartRateDataPoints.forEach({ heartRateDataPoint in
-            print(heartRateDataPoint.getTimeStampValue())
-        })
-        
+        // Perform prediction and catch any errors.
         do {
             let model = try STORCTabularClassifier_Boosted_Tree(configuration: MLModelConfiguration())
             let prediction = try model.prediction(
@@ -155,6 +207,14 @@ class ContractionMonitoringDriver {
         }
     }
     
+    /**
+     * Converts a LinkedList containing > 19 heart rate datapoints to a list containing the 19 most recent datapoints that can be used by the STORCTabularClassifier_Boosted_Tree ML model.
+     *
+     * @param heartRateDataPointsLinkedList The LinkedList of heart rate values that needs to be trimmed.
+     *
+     * @returns A list containing the 19 most recent heart rate datapoint values.
+     *
+     */
     private func convertLinkedListTo19MostRecent(heartRateDataPointLinkedList: LinkedList<HeartRateDataPoint>) -> [HeartRateDataPoint]{
         var heartRateDataPointList = [HeartRateDataPoint]()
         for hrValue in heartRateDataPointLinkedList {
@@ -162,7 +222,7 @@ class ContractionMonitoringDriver {
         }
         print(heartRateDataPointLinkedList.length, " SIZE")
         heartRateDataPointList.reverse()
-                
+            
         if(heartRateDataPointList.count >= 19){
             var finalHeartRateDataPointList = [HeartRateDataPoint]()
             var count = 0
@@ -173,6 +233,7 @@ class ContractionMonitoringDriver {
             finalHeartRateDataPointList.reverse()
             return finalHeartRateDataPointList
         }else{
+            // If there are less than 19 datapoints, a prediction cannot be perfomed so the original list is returned.
             heartRateDataPointList.reverse()
             var distanceTo19 = 19 - heartRateDataPointList.count // x amount of entries need to be added
             while(distanceTo19 != 0){
