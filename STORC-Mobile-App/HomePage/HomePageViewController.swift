@@ -57,6 +57,10 @@ class HomePageViewController: UIViewController, WCSessionDelegate {
         self.pushValidContraction()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.fillViewsWithMostRecentContractionData()
+    }
+    
     // Required delegate functions for WCSession
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {}
     func sessionDidBecomeInactive(_ session: WCSession) {}
@@ -132,6 +136,9 @@ class HomePageViewController: UIViewController, WCSessionDelegate {
         
         if(!contractionValues.isEmpty){
             setupRecentContractionHRChart(dataPoints: mostRecentContraction)
+        }else{
+            setupRecentContractionHRChart(dataPoints: [:])
+            dateOfMostRecentContractionLabel.text = "No Contractions Detected"
         }
         
         let maxBPM = mostRecentContraction.values.max()

@@ -71,6 +71,9 @@
                                 <color key="tintColor" systemColor="systemRedColor"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Delete"/>
+                                <connections>
+                                    <action selector="deleteButtonPressed:" destination="UdQ-68-sIC" eventType="touchUpInside" id="0PQ-NM-gFo"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="a8X-px-gyi"/>

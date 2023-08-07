@@ -65,13 +65,20 @@ class HistoricalRecordsViewController: UIViewController, UITableViewDelegate, UI
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         context = appDelegate.persistentContainer.viewContext
         
-        var unmodifiedContractionsList = getContractions()
+        updateTableAndContractionInfo()
+    }
+    
+    func updateTableAndContractionInfo(){
+        let unmodifiedContractionsList = getContractions()
+        contractionsList.removeAll()
         for contractionKey in unmodifiedContractionsList.keys {
             contractionsList.append([contractionKey : unmodifiedContractionsList[contractionKey]!])
         }
-        
+        historicalRecordsTableView.reloadData()
     }
-    
+    override func viewDidAppear(_ animated: Bool) {
+        updateTableAndContractionInfo()
+    }
     /**
      * Returns  a list of all previously detected contractions from CoreData.
      */

@@ -7,12 +7,14 @@
 
 import UIKit
 import Charts
+import CoreData
 
 class DetailedBreakdownViewController: UIViewController {
     
     var contractionDate = Date()
     var contractionHRValues = [Int]()
     var contractionHRDataPoints = [Double : Int]()
+    var context:NSManagedObjectContext!
     
     @IBOutlet weak var contractionBPMLabel: UILabel!
     @IBOutlet weak var contractionDateLabel: UILabel!
@@ -21,10 +23,17 @@ class DetailedBreakdownViewController: UIViewController {
     @IBAction func doneButtonPressed(_ sender: Any) {
         self.dismiss(animated: true)
     }
+    @IBAction func deleteButtonPressed(_ sender: Any) {
+        deleteContraction(contractionDate: contractionDate)
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        context = appDelegate.persistentContainer.viewContext
+        
         setupRecentContractionHRChart(dataPoints: contractionHRDataPoints)
         contractionDateLabel.text = "\(contractionDate)"
         contractionBPMLabel.text = "\(contractionHRValues.max() ?? -1) / \(contractionHRValues.min() ?? -1) BPM"
@@ -74,4 +83,28 @@ class DetailedBreakdownViewController: UIViewController {
         recentContractionHRChart.autoScaleMinMaxEnabled = false
         recentContractionHRChart.data = data
     }
+    
+    /**
+     * Returns  a list of all previously detected contractions from CoreData.
+     */
+    func deleteContraction(contractionDate : Date) {
+        var contractionDataPoints = [Date : [Double: Int]]()
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Contraction")
+        request.returnsObjectsAsFaults = false
+        let result = try? context.fetch(request)
+
+        for data in result as! [NSManagedObject] {
+            if(data.value(forKey: "timeOccurred") as! Date == contractionDate){
+                context.delete(data)
+            }
+        }
+        do {
+            try context.save()
+            print("Successfully deleted object")
+        } catch {
+            print("Fetching data Failed")
+        }
+        self.dismiss(animated: true)
+    }
+    
 }
