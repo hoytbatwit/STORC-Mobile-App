@@ -85,7 +85,7 @@ class DetailedBreakdownViewController: UIViewController {
     }
     
     /**
-     * Returns  a list of all previously detected contractions from CoreData.
+     * Deletes a contraction from Core Data. 
      */
     func deleteContraction(contractionDate : Date) {
         var contractionDataPoints = [Date : [Double: Int]]()

@@ -68,6 +68,7 @@ class HistoricalRecordsViewController: UIViewController, UITableViewDelegate, UI
         updateTableAndContractionInfo()
     }
     
+    // Reloads the historical records table and accompanying information.
     func updateTableAndContractionInfo(){
         let unmodifiedContractionsList = getContractions()
         contractionsList.removeAll()
